@@ -1,0 +1,23 @@
+fileFormatVersion: 2
+guid: 2d5ddbacd4c6b094dbcf50edeee21159
+timeCreated: 1508737918
+licenseType: Free
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: AuldMagick
+  fontNames:
+  - AuldMagick
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 0786b0e9bf504bd4098722399825611c, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

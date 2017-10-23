@@ -1,0 +1,22 @@
+fileFormatVersion: 2
+guid: a32340d3e41349b41b69dd42ae7090c9
+timeCreated: 1508737918
+licenseType: Free
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: TheOneRing
+  fontNames:
+  - TheOneRing
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
