@@ -5,7 +5,6 @@ using UnityEngine;
 public class Player1Controller : MonoBehaviour {
 
 	//Public Variables
-
 	public float speed = 200;
 	[SerializeField]
 	private float rightX = 683f;
@@ -19,9 +18,7 @@ public class Player1Controller : MonoBehaviour {
 	private float fireRate = 0.5f;
 	[SerializeField]
 	GameObject spell;
-
-
-
+	public DamageCalculator damageCalc;
 	//Private variables
 	Rigidbody2D rBody;
 	private Transform _transform;
@@ -31,12 +28,15 @@ public class Player1Controller : MonoBehaviour {
 	private float moveHorizontal;
 	private float moveVertical;
 
+	public int Health { get; set; }
+
 	// Use this for initialization
 	void Start () {
 		rBody = GetComponent<Rigidbody2D> ();
 		_transform = gameObject.GetComponent<Transform> ();
 		_currentPos = _transform.position;
-
+		damageCalc = gameObject.GetComponent<DamageCalculator>();
+		Health = 100;
 	}
 	
 	// Update is called once per frame
@@ -95,22 +95,27 @@ public class Player1Controller : MonoBehaviour {
 
 	public void OnCollisionEnter2D(Collision2D other) {
 		if (other.gameObject.tag.Equals("player2")) {
-			Debug.Log("Collide w/ P2");
+			Debug.Log("P1 -> P2");
 			rBody.isKinematic = true;
 			rBody.velocity = Vector3.zero;
 			rBody.angularVelocity = 0f;
+		}
+
+		else {
+			//The object is a spell
+			int damage = damageCalc.calculateDamage (other);
+			Health -= damage;
 		}
 	}
 
 	public void OnCollisionExit2D(Collision2D other) {
 		if (other.gameObject.tag.Equals("player2")) {
-			Debug.Log("Stop collide w/ P2");
+			Debug.Log("P1 -/> P2");
 			rBody.isKinematic = false;
 			moveHorizontal = Input.GetAxis ("Horizontal");
 			moveVertical = Input.GetAxis ("Vertical");
 			transform.Translate (moveHorizontal * speed * Time.deltaTime, 0f, 0f);
 			transform.Translate (0f, moveVertical * speed * Time.deltaTime, 0f);
 		}
-	
 	}
 }

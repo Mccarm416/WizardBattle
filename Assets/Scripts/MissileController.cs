@@ -9,6 +9,7 @@ public class MissileController : MonoBehaviour {
 	private Vector2 _currentPos;
 	private GameObject missile;
 */
+
 	void Start () {
 		//Assign physics layer
 		gameObject.layer = 10;
