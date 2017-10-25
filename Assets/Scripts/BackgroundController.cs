@@ -11,13 +11,13 @@ public class BackgroundController : MonoBehaviour {
 	public int healthP1;
 	public int healthP2;
 	Player1Controller player1;
-	Player2Controller player2;
+	Player2AIController player2;
 
 	// Use this for initialization
 	void Start () {
-		//Get the player controllers
+		//Get the player controller scripts
 		player1 = GameObject.FindGameObjectWithTag("player1").GetComponent<Player1Controller> ();
-		player2 = GameObject.FindGameObjectWithTag("player2").GetComponent <Player2Controller> ();
+		player2 = GameObject.FindGameObjectWithTag("player2").GetComponent <Player2AIController> ();
 		initialiseUI ();
 	}
 

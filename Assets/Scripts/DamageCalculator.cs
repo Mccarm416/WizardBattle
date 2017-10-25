@@ -15,7 +15,6 @@ public class DamageCalculator : MonoBehaviour {
 		else {
 			Debug.Log ("No spell detected!!!");
 		}
-
 		return damage;
 	}
 
