@@ -28,11 +28,12 @@ public class Player2AIController : MonoBehaviour {
 		rBody = GetComponent<Rigidbody2D> ();
 		Health = 100;	
 		Speed = 200f;
-		idealDistance = 80;
+		idealDistance = 200;
 		fireRate = 0.5f;
 		nextShot = 0.0f;
 		deadArea = 10;
 		player1 = GameObject.FindGameObjectWithTag("player1").GetComponent<Player1Controller> ();
+		rBody.freezeRotation = true;
 	}
 
 	void Update () {
@@ -66,7 +67,6 @@ public class Player2AIController : MonoBehaviour {
 			_transform.Translate (0f, travelPos.y * Speed * Time.deltaTime, 0f);
 		}
 		else {
-			Debug.Log ("Dead area");
 			/*
 			 * Working on a circling mechanism
 			 * 
@@ -84,8 +84,8 @@ public class Player2AIController : MonoBehaviour {
 			//Get position
 			_transform = gameObject.GetComponent<Transform> ();
 			_currentPos = _transform.position;
-			//Get mouse location
-			Vector2 mousePos = Camera.main.ScreenToWorldPoint (Input.mousePosition);	
+			//Get player location
+			Vector2 mousePos = player1.transform.position;	
 			//Determine the direction than normalize (vector becomes a magnitude of 1)
 			Vector2 direction = mousePos - _currentPos;
 			direction.Normalize();
@@ -101,7 +101,6 @@ public class Player2AIController : MonoBehaviour {
 	//Collision methods
 	public void OnCollisionEnter2D(Collision2D other) {
 		if (other.gameObject.tag.Equals("player1")) {
-			Debug.Log("P2 -> P1");
 			rBody.isKinematic = true;
 			rBody.velocity = Vector3.zero;
 			rBody.angularVelocity = 0f;
@@ -117,7 +116,6 @@ public class Player2AIController : MonoBehaviour {
 			//The object is a spell
 			int damage = damageCalc.calculateDamage (other);
 			Health -= damage;
-			Destroy (other.gameObject);
 		}
 	}
 

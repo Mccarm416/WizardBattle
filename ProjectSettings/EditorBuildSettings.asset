@@ -4,4 +4,10 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/MainMenu.unity
+    guid: 618d40a00d891aa4d9d85ff442554dfd
+  - enabled: 1
+    path: Assets/WizardBattle.unity
+    guid: ce682d5ae54023c41b684e4943afab61

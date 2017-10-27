@@ -9,9 +9,18 @@ public class MissileController : MonoBehaviour {
 	private Vector2 _currentPos;
 	private GameObject missile;
 */
+	public AudioClip fizzle;
+	public AudioClip hit;
+	private AudioSource audioSrc;
+
+
 	void Start () {
+		
 		Player1Controller player1;
 		Player2AIController player2;
+		audioSrc = GetComponent<AudioSource> ();
+
+		//Assign the layer based on the closest player when initialised
 		player1 = GameObject.FindGameObjectWithTag("player1").GetComponent<Player1Controller> ();
 		player2 = GameObject.FindGameObjectWithTag("player2").GetComponent <Player2AIController> ();
 		float distanceP1 = Vector2.Distance (transform.position, player1.transform.position);
@@ -43,9 +52,30 @@ public class MissileController : MonoBehaviour {
 
 	public void OnCollisionEnter2D(Collision2D other) {
 		if (other.gameObject.GetComponent <MissileController>() != null) {
-			Destroy (other.gameObject);
+			audioSrc.enabled = true;
+			audioSrc.clip = fizzle;
+			audioSrc.Play ();
+			StartCoroutine (waitDestroy ());
+		}
+		else if (other.gameObject.tag.Equals("player1") || other.gameObject.tag.Equals("player2")) {
+			audioSrc.enabled = true;
+			audioSrc.clip = hit;
+			audioSrc.volume = 1f;
+			audioSrc.Play ();
+			StartCoroutine (waitDestroy ());
+		}			
+		else if (other.gameObject.tag.Equals("border")){
 			Destroy (gameObject);
 		}
+
+	}
+
+	IEnumerator waitDestroy() {
+		GetComponent<CircleCollider2D> ().enabled = false;
+		GetComponent<SpriteRenderer> ().enabled = false;
+		Destroy(GetComponent<Rigidbody2D>());
+		yield return new WaitForSeconds (1f);
+		Destroy (gameObject);
 	}
 	// Update is called once per frame
 	void Update () {
