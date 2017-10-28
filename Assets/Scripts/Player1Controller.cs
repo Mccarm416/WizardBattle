@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Player1Controller : MonoBehaviour {
 	//Used by first player
@@ -20,43 +21,48 @@ public class Player1Controller : MonoBehaviour {
 	private float moveVertical;
 	private Vector2 newPos;
 	private AudioSource playerAudio;
+	private Camera camera;
 
 	public AudioClip death01;
 	public  AudioClip death02;
 
-	bool boundCheckX;
-	bool boundCheckY;
 	public int Health { get; set; }
+	public int hits { get; set; }
+	public int hitsTaken { get; set; }
+
+	bool dying;
+	public AudioClip deathSound;
 
 	void Start () {
+		camera = Camera.main;
+		dying = false;
 		rBody = GetComponent<Rigidbody2D> ();
 		_transform = gameObject.GetComponent<Transform> ();
 		_currentPos = _transform.position;
 		damageCalc = gameObject.GetComponent<DamageCalculator>();
 		Health = 5;
+		hits = 0;
+		hitsTaken = 0;
 	}
 
 	void Update () {
 		_transform = gameObject.GetComponent<Transform> ();
 		_currentPos = _transform.position;
-		boundCheckX = false;
-		boundCheckY = false;
 		Move ();
 		//Shooting
 		if (Input.GetKey (KeyCode.Space)) {
 			Shoot ();
 		}
+		if (dying) {
+			camera.transform.position = new Vector3 (transform.position.x, transform.position.y+10, -10);
+		}
 	}
 
 	void Move() {
 		//Movement
-		//Debug.Log("Horizontal :" +moveHorizontal);
-		//Debug.Log("Vertical :" +moveVertical);
 		moveHorizontal = Input.GetAxis ("Horizontal");
 		moveVertical = Input.GetAxis ("Vertical");
 		CheckBoundary ();
-		//Debug.Log("Horizontal2 :" +moveHorizontal);
-		//Debug.Log("Vertical2 :" +moveVertical);
 		newPos.x = moveHorizontal * speed * Time.deltaTime;
 		newPos.y = moveVertical * speed * Time.deltaTime;
 
@@ -67,19 +73,19 @@ public class Player1Controller : MonoBehaviour {
 
 	private void CheckBoundary() {
 		//Checks the players position against the camera boundary to prevent them from moving off of it
-		if (_currentPos.x + moveHorizontal < leftX) {
+		if (_currentPos.x + (moveHorizontal* speed * Time.deltaTime) < leftX) {
 			Debug.Log ("curPos < leftX");
 			moveHorizontal = 0;
 		}
-		if (_currentPos.x + moveHorizontal > rightX) {
+		if (_currentPos.x + (moveHorizontal* speed * Time.deltaTime) > rightX) {
 			Debug.Log ("curPos > rightX");
 			moveHorizontal = 0;
 		}
-		if (_currentPos.y + moveVertical > topY) {
+		if (_currentPos.y + (moveVertical* speed * Time.deltaTime) > topY) {
 			Debug.Log ("curPos > topY");
 			moveVertical = 0;
 		}
-		if (_currentPos.y + moveVertical < botY) {
+			if (_currentPos.y + (moveVertical * speed * Time.deltaTime) < botY) {
 			Debug.Log ("curPos < botY");
 			moveVertical = 0;
 		}
@@ -105,6 +111,7 @@ public class Player1Controller : MonoBehaviour {
 			//The object is a spell
 			int damage = damageCalc.calculateDamage (other);
 			Health -= damage;
+			hitsTaken++;
 			if (Health >= 0){
 				Death();
 			}
@@ -122,13 +129,6 @@ public class Player1Controller : MonoBehaviour {
 			Move ();
 		}
 	}
-
-
-
-
-
-
-
 
 	public void Shoot() {
 		if (Time.time > nextShot) {
@@ -149,15 +149,60 @@ public class Player1Controller : MonoBehaviour {
 	}
 
 	public void Death() {
-		int randomMusic = Random.Range (1, 3);
+		//Objects that will be used during the end screen
+		Player2Controller player2 = GameObject.FindGameObjectWithTag("player2").GetComponent<Player2Controller> ();
+		//EndScreenController.endScreenScript.player1 = GetComponent<Player1Controller> ();
+		//EndScreenController.endScreenScript.player2 = player2;
+
+		//Stops the other player from shooting
+		//Destroy (player2.gameObject);
+		//Stop all sound then play the death sound
+		StopSound();
+		StartCoroutine(MoveCamera());
+		StartCoroutine (Scream ());
+	}
+
+	IEnumerator MoveCamera() {
+		dying = true;
+		AudioSource cameraAudio = camera.GetComponent<AudioSource> ();
+		Debug.Log ("MoveCamera()");
+		camera.transform.position = new Vector3 (transform.position.x, transform.position.y+10, -10);
+		Debug.Log ("Camera moved");
+		//Changes the cameras resolution
+		camera.orthographicSize = Mathf.Lerp (520, 60, 20);
+		Time.timeScale = 0.1f;
+		cameraAudio.clip = deathSound;
+		cameraAudio.enabled = true;
+		cameraAudio.Play ();
+		yield return new WaitForSeconds (1f);
+	}
+
+	IEnumerator Scream() {
+		Time.timeScale = 0.1f;
+		//Decide the death scream to use
+		Debug.Log ("Deciding death scream");
+		int randomScream = Random.Range (1, 3);
+
 		playerAudio = GetComponent<AudioSource> ();
-		if (randomMusic == 1) {
+		if (randomScream == 1) {
 			playerAudio.clip = death01;
-		}
-		else if (randomMusic == 2) {
+		} 
+		else if (randomScream == 2) {
 			playerAudio.clip = death02;
 		}
+		Debug.Log ("Death scream: " + randomScream);
 		playerAudio.enabled = true;
 		playerAudio.Play ();
+		yield return new WaitForSeconds (0.6f);
+		Time.timeScale = 1f;
+		SceneManager.LoadScene(2);
+	}
+
+	void StopSound() {
+		AudioSource[] audioSrcs = FindObjectsOfType (typeof(AudioSource)) as AudioSource[];
+
+		foreach (AudioSource aSrc in audioSrcs) {
+			aSrc.Stop();
+		}
 	}
 }

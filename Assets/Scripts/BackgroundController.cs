@@ -22,8 +22,10 @@ public class BackgroundController : MonoBehaviour {
 	private AudioSource musicPlayer;
 
 	private float menuBuffer;
-	bool menuCheck;
 	GameObject pauseMenu;
+	public Button btnRestart;
+	public Button btnResume;
+	AudioSource audioSrc;
 
 	void Start () {
 		//Get the player controller scripts
@@ -31,7 +33,7 @@ public class BackgroundController : MonoBehaviour {
 		player2 = GameObject.FindGameObjectWithTag("player2").GetComponent <Player2AIController> ();
 		pauseMenu = GameObject.Find ("pauseMenuPanel");
 		pauseMenu.SetActive (false);
-		menuCheck = false;
+		audioSrc = pauseMenu.GetComponent<AudioSource>();
 		menuBuffer = 0f;
 		initialiseMusic ();
 		initialiseUI ();
@@ -68,20 +70,31 @@ public class BackgroundController : MonoBehaviour {
 
 	public void btnResumeClick() {
 		//Resume gameplay
+		Debug.Log("Resume clicked");
+		Time.timeScale = 1f;
+		audioSrc.enabled = true;
+		audioSrc.Play ();
+		pauseMenu.SetActive (false);
+		menuBuffer = Time.time + 0.5f;
 	}
 
 	public void btnRestartClick() {
 		//Restart the game
+		SceneManager.LoadScene(1);
 	}
 
 	public void PauseMenu() {
 		//Calls the pause menu. A buffer of 0.5s between menu calls is added to prevent accidental opening and closing.
 		if (Time.timeScale == 1f && Time.time > menuBuffer) {
-				pauseMenu.SetActive (true);
-				Time.timeScale = 0f;
+			pauseMenu.SetActive (true);
+			Time.timeScale = 0f;
+			audioSrc.enabled = true;
+			audioSrc.Play ();
 			} 
 			else if (Time.timeScale == 0f) {
 				Time.timeScale = 1f;
+				audioSrc.enabled = true;
+				audioSrc.Play ();
 				pauseMenu.SetActive (false);
 				menuBuffer = Time.time + 0.5f;
 			}
