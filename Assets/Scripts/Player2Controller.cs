@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Player2Controller : MonoBehaviour {
-	//Will be used by second human player
+	//Will be used by second human player. Currently unused in this build.
 	DamageCalculator damageCalc;
 	Rigidbody2D rBody;
 	public float Speed { get; set; }

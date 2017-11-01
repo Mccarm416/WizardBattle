@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class Player1Controller : MonoBehaviour {
 	//Used by first player
-	public float speed = 200f;
+
 	private float rightX = 685f;
 	private float leftX = -685f;
 	private float topY = 372f;
@@ -22,18 +22,23 @@ public class Player1Controller : MonoBehaviour {
 	private Vector2 newPos;
 	private AudioSource playerAudio;
 	private Camera camera;
-
-	public AudioClip death01;
-	public  AudioClip death02;
+	private Animator animator;
+	private Player2AIController player2;
 
 	public int Health { get; set; }
 	public int hits { get; set; }
 	public int hitsTaken { get; set; }
+	public float Speed { get; set; }
 
+	//Death variables
 	bool dying;
 	public AudioClip deathSound;
+	public AudioClip death01;
+	public  AudioClip death02;
 
 	void Start () {
+		animator = GetComponent<Animator> ();
+		Speed = 200f;
 		camera = Camera.main;
 		dying = false;
 		rBody = GetComponent<Rigidbody2D> ();
@@ -43,49 +48,63 @@ public class Player1Controller : MonoBehaviour {
 		Health = 5;
 		hits = 0;
 		hitsTaken = 0;
+		player2 = GameObject.FindGameObjectWithTag("player2").GetComponent<Player2AIController> ();
 	}
 
 	void Update () {
+		
 		_transform = gameObject.GetComponent<Transform> ();
 		_currentPos = _transform.position;
 		Move ();
-		//Shooting
-		if (Input.GetKey (KeyCode.Space)) {
-			Shoot ();
-		}
 		if (dying) {
+			//Check to see if the player is dying and if the camera should follow them
 			camera.transform.position = new Vector3 (transform.position.x, transform.position.y+10, -10);
+		}
+		else {
+			//Shooting
+			if (Input.GetKey (KeyCode.Space)) {
+				Shoot ();
+			}
 		}
 	}
 
 	void Move() {
-		//Movement
+		//Controls player movement
+		//Get player input
 		moveHorizontal = Input.GetAxis ("Horizontal");
 		moveVertical = Input.GetAxis ("Vertical");
+		//Check to see if player is running up against a screen boundary
 		CheckBoundary ();
-		newPos.x = moveHorizontal * speed * Time.deltaTime;
-		newPos.y = moveVertical * speed * Time.deltaTime;
 
+		//Calculating the new point to move to
+		newPos.x = moveHorizontal * Speed * Time.deltaTime;
+		newPos.y = moveVertical * Speed * Time.deltaTime;
+		//Check to see if movement animation should play (this should be snappier)
+		if (moveHorizontal != 0 || moveVertical != 0) {
+			animator.SetBool ("playerMove", true);
+		}
+		else {
+			animator.SetBool ("playerMove", false);
+		}
+		//Move to the new position
 		transform.Translate (newPos);
-
-			//transform.Translate (0f, moveVertical * speed * Time.deltaTime, 0f);
 	}
 
 	private void CheckBoundary() {
 		//Checks the players position against the camera boundary to prevent them from moving off of it
-		if (_currentPos.x + (moveHorizontal* speed * Time.deltaTime) < leftX) {
+		if (_currentPos.x + (moveHorizontal* Speed * Time.deltaTime) < leftX) {
 			Debug.Log ("curPos < leftX");
 			moveHorizontal = 0;
 		}
-		if (_currentPos.x + (moveHorizontal* speed * Time.deltaTime) > rightX) {
+		if (_currentPos.x + (moveHorizontal* Speed * Time.deltaTime) > rightX) {
 			Debug.Log ("curPos > rightX");
 			moveHorizontal = 0;
 		}
-		if (_currentPos.y + (moveVertical* speed * Time.deltaTime) > topY) {
+		if (_currentPos.y + (moveVertical* Speed * Time.deltaTime) > topY) {
 			Debug.Log ("curPos > topY");
 			moveVertical = 0;
 		}
-			if (_currentPos.y + (moveVertical * speed * Time.deltaTime) < botY) {
+		if (_currentPos.y + (moveVertical * Speed * Time.deltaTime) < botY) {
 			Debug.Log ("curPos < botY");
 			moveVertical = 0;
 		}
@@ -112,7 +131,7 @@ public class Player1Controller : MonoBehaviour {
 			int damage = damageCalc.calculateDamage (other);
 			Health -= damage;
 			hitsTaken++;
-			if (Health >= 0){
+			if (Health <= 0){
 				Death();
 			}
 		}
@@ -149,36 +168,38 @@ public class Player1Controller : MonoBehaviour {
 	}
 
 	public void Death() {
-		//Objects that will be used during the end screen
-		Player2Controller player2 = GameObject.FindGameObjectWithTag("player2").GetComponent<Player2Controller> ();
-		//EndScreenController.endScreenScript.player1 = GetComponent<Player1Controller> ();
-		//EndScreenController.endScreenScript.player2 = player2;
-
-		//Stops the other player from shooting
-		//Destroy (player2.gameObject);
-		//Stop all sound then play the death sound
+		//Pass player controllers to the next scenes controller
+		Player1Controller player1 = GetComponent<Player1Controller> ();
+		Destroy (GetComponent<PolygonCollider2D> ());
+		EndScreenController.player1 = player1;
+		EndScreenController.player2 = player2;
+		//Stop the players from moving and shooting
+		player1.Speed = 0f;
+		player1.fireRate = 0f;
+		Destroy (player2.gameObject);
+		//Stop all sound then start the cinematic death
 		StopSound();
-		StartCoroutine(MoveCamera());
+		MoveCamera();
 		StartCoroutine (Scream ());
 	}
 
-	IEnumerator MoveCamera() {
+	void MoveCamera() {
 		dying = true;
+		Debug.Log ("Death time: " + Time.time);
 		AudioSource cameraAudio = camera.GetComponent<AudioSource> ();
 		Debug.Log ("MoveCamera()");
+		//Move the camera
 		camera.transform.position = new Vector3 (transform.position.x, transform.position.y+10, -10);
 		Debug.Log ("Camera moved");
-		//Changes the cameras resolution
+		//Changes the cameras resolution to zoom in on the dying player
 		camera.orthographicSize = Mathf.Lerp (520, 60, 20);
-		Time.timeScale = 0.1f;
+		Time.timeScale = 1f;
 		cameraAudio.clip = deathSound;
 		cameraAudio.enabled = true;
 		cameraAudio.Play ();
-		yield return new WaitForSeconds (1f);
 	}
 
 	IEnumerator Scream() {
-		Time.timeScale = 0.1f;
 		//Decide the death scream to use
 		Debug.Log ("Deciding death scream");
 		int randomScream = Random.Range (1, 3);
@@ -190,13 +211,19 @@ public class Player1Controller : MonoBehaviour {
 		else if (randomScream == 2) {
 			playerAudio.clip = death02;
 		}
+		animator.SetTrigger ("playerDeath");
 		Debug.Log ("Death scream: " + randomScream);
 		playerAudio.enabled = true;
+		//Wait 1 second then play the death scream
+		yield return new WaitForSeconds (1.9f);
 		playerAudio.Play ();
-		yield return new WaitForSeconds (0.6f);
-		Time.timeScale = 1f;
+		Debug.Log ("1st return " + Time.time);
+		//Wait 5 seconds then load the end screen
+		yield return new WaitForSeconds (5f);
+		Debug.Log ("End Screen time: " + Time.time);
 		SceneManager.LoadScene(2);
 	}
+
 
 	void StopSound() {
 		AudioSource[] audioSrcs = FindObjectsOfType (typeof(AudioSource)) as AudioSource[];

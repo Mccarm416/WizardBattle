@@ -376,15 +376,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 521932060106ac6499e47812df98cec4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  winningPlayer: 0
-  player1: {fileID: 0}
-  player2: {fileID: 0}
-  lblP1Hits: {fileID: 0}
-  lblP1HItsTaken: {fileID: 0}
-  lblP1Health: {fileID: 0}
-  lblP2Hits: {fileID: 0}
-  lblP2HItsTaken: {fileID: 0}
-  lblP2Health: {fileID: 0}
+  lblP1Hits: {fileID: 1950142638}
+  lblP1HitsTaken: {fileID: 363475497}
+  lblP1Health: {fileID: 1817041626}
+  lblP2Hits: {fileID: 1285979906}
+  lblP2HitsTaken: {fileID: 309681028}
+  lblP2Health: {fileID: 906056229}
 --- !u!82 &466598694
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1326,7 +1323,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.703}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.659}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:

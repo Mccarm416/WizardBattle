@@ -11,25 +11,46 @@ public class Player2AIController : MonoBehaviour {
 	Rigidbody2D rBody;
 	public int Health  { get; set; }
 	public float Speed { get; set; }
+	public int hits { get; set; }
+	public int hitsTaken { get; set; }
+	public float fireRate {get; set;}
+	private Camera camera;
+	private AudioSource playerAudio;
+
+	//AI values
 	private float idealDistance; //AIs ideal target distance between them and the player
 	private int deadArea; //Dead area the AI is comfortable in
 	private int lowHealth; //AI becomes defensive when his health becomes this low
-	private int offensiveCheck; //AI becomes more aggresive when this number is greater then their HP against the players
+	private int offensiveCheck; //AI becomes more aggresive when this number is greater then their HP against the players(Not yet implemented)
 	private float distance; //Distance from AI to player
 	private Vector2 enemyPos; //Co-ordinates of the enemy player
-	private float nextShot; //Countdown until next shot
-	private float fireRate;//Rate of fire control
+	private float nextShot; //Countdown until next shot.
 	private Player1Controller player1;
+	private Vector2 travelPos; //AIs next positon
+	private float rightX = 685f;
+	private float leftX = -685f;
+	private float topY = 372f;
+	private float botY = -372f;
+	private Animator animator;
 
 	public GameObject spell;
 
+	//Death variables
+	bool dying;
+	public AudioClip deathSound;
+	public AudioClip death01;
+	public  AudioClip death02;
+
 	void Start () {
+		animator = GetComponent<Animator> ();
+		camera = Camera.main;
+		dying = false;
 		damageCalc = gameObject.GetComponent<DamageCalculator>();
 		rBody = GetComponent<Rigidbody2D> ();
-		Health = 100;	
-		Speed = 200f;
+		Health = 5;	
+		Speed = 180f;
 		idealDistance = 200;
-		fireRate = 0.5f;
+		fireRate = 1f;
 		nextShot = 0.0f;
 		deadArea = 10;
 		player1 = GameObject.FindGameObjectWithTag("player1").GetComponent<Player1Controller> ();
@@ -37,25 +58,30 @@ public class Player2AIController : MonoBehaviour {
 	}
 
 	void Update () {
-		//Re-initialise variables
-		distance = Vector2.Distance(player1.transform.position, transform.position);
-		_transform = GetComponent<Transform> ();
-		_currentPos = _transform.position;
-		enemyPos = player1.transform.position;
-
-		Move ();
-		Shoot ();
+		if (!dying) {
+			//Re-initialise variables if the character is not dead
+			distance = Vector2.Distance(player1.transform.position, transform.position);
+			_transform = GetComponent<Transform> ();
+			_currentPos = _transform.position;
+			enemyPos = player1.transform.position;
+			Move ();
+			Shoot ();
+		}
+		else {
+			camera.transform.position = new Vector3 (transform.position.x, transform.position.y + 10, -10);
+		}
 	}
-		
+
 	public void Move() {
 		//Check distance
 		//Look at creating an alternating idealDistance for more dynamic play
-		Vector2 travelPos;
+
 		//Determine to move away or not. The greater/less than checks creates a dead deadspace.
 		if ((distance - idealDistance) > idealDistance + deadArea) {
 			//Move closer
 			travelPos = new Vector2 (enemyPos.x - _currentPos.x, enemyPos.y - _currentPos.y);
 			travelPos.Normalize ();
+			CheckBoundary ();
 			_transform.Translate (travelPos.x * Speed * Time.deltaTime, 0f, 0f);
 			_transform.Translate (0f, travelPos.y * Speed * Time.deltaTime, 0f);
 		} 
@@ -63,6 +89,7 @@ public class Player2AIController : MonoBehaviour {
 			//Move away
 			travelPos = new Vector2 (enemyPos.x + _currentPos.x, enemyPos.y + _currentPos.y);
 			travelPos.Normalize ();
+			CheckBoundary ();
 			_transform.Translate (travelPos.x * Speed * Time.deltaTime, 0f, 0f);
 			_transform.Translate (0f, travelPos.y * Speed * Time.deltaTime, 0f);
 		}
@@ -77,8 +104,28 @@ public class Player2AIController : MonoBehaviour {
 			_transform.Translate (0f, travelPos.y * Speed * Time.deltaTime, 0f);
 			*/
 		}
-
 	}
+
+	private void CheckBoundary() {
+		//Checks the players position against the camera boundary to prevent them from moving off of it
+		if (_currentPos.x + (travelPos.x * Speed * Time.deltaTime) < leftX) {
+			Debug.Log ("curPos < leftX");
+			travelPos.x = 0;
+		}
+		if (_currentPos.x + (travelPos.x * Speed * Time.deltaTime) > rightX) {
+			Debug.Log ("curPos > rightX");
+			travelPos.x = 0;
+		}
+		if (_currentPos.y + (travelPos.y * Speed * Time.deltaTime) > topY) {
+			Debug.Log ("curPos > topY");
+			travelPos.y = 0;
+		}
+		if (_currentPos.y + (travelPos.y * Speed * Time.deltaTime) < botY) {
+			Debug.Log ("curPos < botY");
+			travelPos.y = 0;
+		}
+	}
+
 	public void Shoot() {
 		if (Time.time > nextShot) {
 			//Get position
@@ -91,7 +138,7 @@ public class Player2AIController : MonoBehaviour {
 			direction.Normalize();
 			//Create the projectile and fire it
 			GameObject projectile = (GameObject)Instantiate (spell, _currentPos, Quaternion.identity);
-			projectile.GetComponent<Rigidbody2D>().velocity = direction * 500;
+			projectile.GetComponent<Rigidbody2D>().velocity = direction * 250;
 			//Cooldown
 			nextShot = Time.time + fireRate;
 		}
@@ -116,6 +163,10 @@ public class Player2AIController : MonoBehaviour {
 			//The object is a spell
 			int damage = damageCalc.calculateDamage (other);
 			Health -= damage;
+			hitsTaken++;
+			if (Health <= 0) {
+				Death ();
+			}
 		}
 	}
 
@@ -129,6 +180,73 @@ public class Player2AIController : MonoBehaviour {
 			Debug.Log("P1 -/> Border");
 			rBody.isKinematic = false;
 			Move ();
+		}
+	}
+
+	public void Death() {
+		//Pass player controllers to the next scenes controller
+		Destroy(GetComponent<PolygonCollider2D>());
+		Player1Controller player1 = GameObject.FindGameObjectWithTag("player1").GetComponent<Player1Controller> ();
+		Player2AIController player2 = GetComponent<Player2AIController> ();
+		EndScreenController.player1 = player1;
+		EndScreenController.player2 = player2;
+
+		//Stop the players from moving and shooting
+		player2.Speed = 0f;
+		player2.fireRate = 0f;
+		Destroy (player1.gameObject);
+
+		//Stop all sound then start the cinematic death
+		StopSound();
+		MoveCamera();
+		StartCoroutine (Scream ());
+	}
+
+	void MoveCamera() {
+		dying = true;
+		Debug.Log ("Death time: " + Time.time);
+		AudioSource cameraAudio = camera.GetComponent<AudioSource> ();
+		Debug.Log ("MoveCamera()");
+		camera.transform.position = new Vector3 (transform.position.x, transform.position.y+10, -10);
+		Debug.Log ("Camera moved");
+		//Changes the cameras resolution to zoom in on the dying player
+		camera.orthographicSize = Mathf.Lerp (520, 60, 20);
+		Time.timeScale = 1f;
+		cameraAudio.clip = deathSound;
+		cameraAudio.enabled = true;
+		cameraAudio.Play ();
+	}
+
+	IEnumerator Scream() {
+		//Decide the death scream to use
+		Debug.Log ("Deciding death scream");
+		int randomScream = Random.Range (1, 3);
+
+		playerAudio = GetComponent<AudioSource> ();
+		if (randomScream == 1) {
+			playerAudio.clip = death01;
+		} 
+		else if (randomScream == 2) {
+			playerAudio.clip = death02;
+		}
+		Debug.Log ("Death scream: " + randomScream);
+		playerAudio.enabled = true;
+		animator.SetTrigger ("playerDeath");
+		//Wait 1 second then play the death scream
+		yield return new WaitForSeconds (1.5f);
+		playerAudio.Play ();
+		Debug.Log ("1st return " + Time.time);
+		//Wait 5 seconds then load the end screen
+		yield return new WaitForSeconds (5f);
+		Debug.Log ("End Screen time: " + Time.time);
+		UnityEngine.SceneManagement.SceneManager.LoadScene(2);
+	}
+
+
+	void StopSound() {
+		AudioSource[] audioSrcs = FindObjectsOfType (typeof(AudioSource)) as AudioSource[];
+		foreach (AudioSource aSrc in audioSrcs) {
+			aSrc.Stop();
 		}
 	}
 }
