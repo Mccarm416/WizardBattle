@@ -15,7 +15,7 @@ public class Player1Controller : MonoBehaviour {
 	private Rigidbody2D rBody;
 	private Transform _transform;
 	private Vector2 _currentPos;
-	private float fireRate = 0.5f;
+
 	private float nextShot = 0.0f;
 	private float moveHorizontal;
 	private float moveVertical;
@@ -25,6 +25,13 @@ public class Player1Controller : MonoBehaviour {
 	private Animator animator;
 	private Player2AIController player2;
 
+
+
+	private bool isEnabled { get; set; }
+	private float prevFR;
+	private float prevSpeed;
+
+	public float fireRate { get; set; }
 	public int Health { get; set; }
 	public int hits { get; set; }
 	public int hitsTaken { get; set; }
@@ -37,36 +44,41 @@ public class Player1Controller : MonoBehaviour {
 	public  AudioClip death02;
 
 	void Start () {
-		animator = GetComponent<Animator> ();
+		enabled = true;
 		Speed = 200f;
+		fireRate = 0.7f;
+		Health = 5;
+		animator = GetComponent<Animator> ();
 		camera = Camera.main;
 		dying = false;
 		rBody = GetComponent<Rigidbody2D> ();
 		_transform = gameObject.GetComponent<Transform> ();
 		_currentPos = _transform.position;
 		damageCalc = gameObject.GetComponent<DamageCalculator>();
-		Health = 5;
 		hits = 0;
 		hitsTaken = 0;
 		player2 = GameObject.FindGameObjectWithTag("player2").GetComponent<Player2AIController> ();
+
 	}
 
 	void Update () {
 		
 		_transform = gameObject.GetComponent<Transform> ();
 		_currentPos = _transform.position;
-		Move ();
-		if (dying) {
-			//Check to see if the player is dying and if the camera should follow them
-			camera.transform.position = new Vector3 (transform.position.x, transform.position.y+10, -10);
-		}
-		else {
-			//Shooting
+
+		if (!dying && enabled) {
+			//Move and shoot
+			Move ();
 			if (Input.GetKey (KeyCode.Space)) {
 				Shoot ();
 			}
+		} 
+		else if (dying) {
+			//Check to see if the player is dying and if the camera should follow them
+			camera.transform.position = new Vector3 (transform.position.x, transform.position.y + 10, -10);
 		}
 	}
+
 
 	void Move() {
 		//Controls player movement
@@ -230,6 +242,31 @@ public class Player1Controller : MonoBehaviour {
 
 		foreach (AudioSource aSrc in audioSrcs) {
 			aSrc.Stop();
+		}
+	}
+
+	public void disable() {
+		if (enabled) {
+			prevSpeed = Speed;
+			prevFR = fireRate;
+			fireRate = 0;
+			Speed = 0;
+			enabled = false;
+			Debug.Log ("Player 1 disbaled");
+		}
+		else {
+			Debug.Log ("Player 1 is already disabled");
+		}
+	}
+	public void enable() {
+		if (!enabled) {
+			Debug.Log ("Player 1 enabled");
+			Speed = prevSpeed;
+			fireRate = prevFR;
+			enabled = true;
+		}
+		else {
+			Debug.Log ("Player 1 is already enabled");
 		}
 	}
 }

@@ -27,6 +27,12 @@ public class BackgroundController : MonoBehaviour {
 	public Button btnResume;
 	AudioSource audioSrc;
 
+	private Image panelReady;
+	public Text lblReady;
+	public Text lblGo;
+	public AudioClip audioGo;
+	public AudioClip audioReady;
+
 	void Start () {
 		//Get the player controller scripts
 		player1 = GameObject.FindGameObjectWithTag("player1").GetComponent<Player1Controller> ();
@@ -34,15 +40,16 @@ public class BackgroundController : MonoBehaviour {
 		pauseMenu = GameObject.Find ("pauseMenuPanel");
 		pauseMenu.SetActive (false);
 		audioSrc = pauseMenu.GetComponent<AudioSource>();
+		panelReady = GameObject.Find ("panelReady").GetComponent<Image> ();
 		menuBuffer = 0f;
 		initialiseMusic ();
 		initialiseUI ();
+		StartCoroutine (ReadyFight ());
 	}
 
 	void Update () {
 		initialiseUI ();
 		if (Input.GetKeyDown (KeyCode.Escape)) {
-			Debug.Log ("Escape hit");
 			PauseMenu ();
 		}
 	}
@@ -66,6 +73,35 @@ public class BackgroundController : MonoBehaviour {
 			musicPlayer.clip = music02;
 		}
 		musicPlayer.Play ();
+	}
+
+	IEnumerator ReadyFight() {
+		//Ready... Fight! played at start of round
+		Debug.Log("Starting ReadyFight()");
+		AudioSource aS = GameObject.Find ("panelReady").GetComponent<AudioSource>();
+		aS.enabled = true;
+		aS.clip = audioReady;
+		aS.Play ();
+		lblGo.enabled = false;
+		player1.disable ();
+		player2.disable ();
+		//Darkens the panel
+		panelReady.CrossFadeAlpha (2.8f, 3f, false);
+		yield return new WaitForSeconds (3f);
+		//Hide the panel
+		panelReady.CrossFadeAlpha (0f, 0.3f, false);
+		player1.enable();
+		player2.enable ();
+		Debug.Log ("Players enabled");
+		aS.clip = audioGo;
+		aS.Play ();
+		lblReady.enabled = false;
+		lblGo.enabled = true;
+		Debug.Log ("Labels switched. Waiting 1 second");
+		yield return new WaitForSeconds (1.4f);
+		lblGo.enabled = false;
+		Debug.Log ("lblGo disabled. End of ReadyFight() and destroying panelReady");
+		Destroy(GameObject.FindGameObjectWithTag("panelReady"));
 	}
 
 	public void btnResumeClick() {

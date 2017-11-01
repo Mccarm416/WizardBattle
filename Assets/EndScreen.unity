@@ -382,6 +382,7 @@ MonoBehaviour:
   lblP2Hits: {fileID: 1285979906}
   lblP2HitsTaken: {fileID: 309681028}
   lblP2Health: {fileID: 906056229}
+  victoryFanfare: {fileID: 8300000, guid: ba22d6d36ff89c0459ced9f3db7b2a60, type: 3}
 --- !u!82 &466598694
 AudioSource:
   m_ObjectHideFlags: 0

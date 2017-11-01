@@ -33,6 +33,10 @@ public class Player2AIController : MonoBehaviour {
 	private float botY = -372f;
 	private Animator animator;
 
+	private bool isEnabled { get; set; }
+	private float prevFR;
+	private float prevSpeed;
+
 	public GameObject spell;
 
 	//Death variables
@@ -42,15 +46,16 @@ public class Player2AIController : MonoBehaviour {
 	public  AudioClip death02;
 
 	void Start () {
+		enabled = true;
+		Speed = 180f;
+		fireRate = 1f;
+		Health = 5;
 		animator = GetComponent<Animator> ();
 		camera = Camera.main;
 		dying = false;
 		damageCalc = gameObject.GetComponent<DamageCalculator>();
 		rBody = GetComponent<Rigidbody2D> ();
-		Health = 5;	
-		Speed = 180f;
 		idealDistance = 200;
-		fireRate = 1f;
 		nextShot = 0.0f;
 		deadArea = 10;
 		player1 = GameObject.FindGameObjectWithTag("player1").GetComponent<Player1Controller> ();
@@ -58,7 +63,7 @@ public class Player2AIController : MonoBehaviour {
 	}
 
 	void Update () {
-		if (!dying) {
+		if (!dying && enabled) {
 			//Re-initialise variables if the character is not dead
 			distance = Vector2.Distance(player1.transform.position, transform.position);
 			_transform = GetComponent<Transform> ();
@@ -67,7 +72,7 @@ public class Player2AIController : MonoBehaviour {
 			Move ();
 			Shoot ();
 		}
-		else {
+		else if (dying){
 			camera.transform.position = new Vector3 (transform.position.x, transform.position.y + 10, -10);
 		}
 	}
@@ -247,6 +252,31 @@ public class Player2AIController : MonoBehaviour {
 		AudioSource[] audioSrcs = FindObjectsOfType (typeof(AudioSource)) as AudioSource[];
 		foreach (AudioSource aSrc in audioSrcs) {
 			aSrc.Stop();
+		}
+	}
+
+	public void disable() {
+		if (enabled) {
+			prevSpeed = Speed;
+			prevFR = fireRate;
+			fireRate = 0;
+			Speed = 0;
+			enabled = false;
+			Debug.Log ("Player 2 disabled");
+		}
+		else {
+			Debug.Log ("Player 2 is already disabled");
+		}
+	}
+	public void enable() {
+		if (!enabled) {
+			Debug.Log ("Player 2 enabled");
+			Speed = prevSpeed;
+			fireRate = prevFR;
+			enabled = true;
+		}
+		else {
+			Debug.Log ("Player 2 is already enabled");
 		}
 	}
 }
