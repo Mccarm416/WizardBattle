@@ -213,9 +213,10 @@ public class Player1Controller : MonoBehaviour {
 
 	IEnumerator Scream() {
 		//Decide the death scream to use
+
+		//Generate a random number between 1-2 to select a death scream
 		Debug.Log ("Deciding death scream");
 		int randomScream = Random.Range (1, 3);
-
 		playerAudio = GetComponent<AudioSource> ();
 		if (randomScream == 1) {
 			playerAudio.clip = death01;
@@ -223,8 +224,8 @@ public class Player1Controller : MonoBehaviour {
 		else if (randomScream == 2) {
 			playerAudio.clip = death02;
 		}
+		//Play the death animation
 		animator.SetTrigger ("playerDeath");
-		Debug.Log ("Death scream: " + randomScream);
 		playerAudio.enabled = true;
 		//Wait 1 second then play the death scream
 		yield return new WaitForSeconds (1.9f);

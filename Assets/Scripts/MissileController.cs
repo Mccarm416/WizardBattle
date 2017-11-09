@@ -72,7 +72,7 @@ public class MissileController : MonoBehaviour {
 
 	IEnumerator waitDestroy() {
 		//Destroys the object after 1 second to let the audio clip play on destruction
-		GetComponent<CircleCollider2D> ().enabled = false;
+		GetComponent<PolygonCollider2D> ().enabled = false;
 		GetComponent<SpriteRenderer> ().enabled = false;
 		Destroy(GetComponent<Rigidbody2D>());
 		yield return new WaitForSeconds (1f);

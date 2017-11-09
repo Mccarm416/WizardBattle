@@ -101,7 +101,7 @@ public class BackgroundController : MonoBehaviour {
 		yield return new WaitForSeconds (1.4f);
 		lblGo.enabled = false;
 		Debug.Log ("lblGo disabled. End of ReadyFight() and destroying panelReady");
-		Destroy(GameObject.FindGameObjectWithTag("panelReady"));
+		Destroy(GameObject.Find("panelReady"));
 	}
 
 	public void btnResumeClick() {

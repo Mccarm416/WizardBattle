@@ -1,0 +1,175 @@
+fileFormatVersion: 2
+guid: 34d6d2ea2c6e5084e901b6bd458fb3a5
+timeCreated: 1509681734
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: fireball2SpriteSheet_0
+    21300002: fireball2SpriteSheet_1
+    21300004: fireball2SpriteSheet_2
+    21300006: fireball2SpriteSheet_6
+    21300008: fireball2SpriteSheet_7
+    21300010: fireball2SpriteSheet_8
+  externalObjects: {}
+  serializedVersion: 4
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: -1
+    aniso: -1
+    mipBias: -1
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: fireball2SpriteSheet_0
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 217
+        width: 62
+        height: 24
+      alignment: 9
+      pivot: {x: 0.59079784, y: 0.4373881}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: fireball2SpriteSheet_1
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 217
+        width: 64
+        height: 24
+      alignment: 9
+      pivot: {x: 0.59924006, y: 0.4773407}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: fireball2SpriteSheet_2
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 217
+        width: 62
+        height: 24
+      alignment: 9
+      pivot: {x: 0.62117153, y: 0.45619965}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: fireball2SpriteSheet_6
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 153
+        width: 64
+        height: 24
+      alignment: 9
+      pivot: {x: 0.59959656, y: 0.49356523}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: fireball2SpriteSheet_7
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 153
+        width: 60
+        height: 24
+      alignment: 9
+      pivot: {x: 0.62535083, y: 0.4980704}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: fireball2SpriteSheet_8
+      rect:
+        serializedVersion: 2
+        x: 127
+        y: 153
+        width: 65
+        height: 24
+      alignment: 9
+      pivot: {x: 0.5931442, y: 0.4873169}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    outline: []
+    physicsShape: []
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

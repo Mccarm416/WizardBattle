@@ -6,8 +6,11 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/MainMenu.unity
+    path: Assets/TitleScreen.unity
     guid: 618d40a00d891aa4d9d85ff442554dfd
   - enabled: 1
     path: Assets/WizardBattle.unity
     guid: ce682d5ae54023c41b684e4943afab61
+  - enabled: 1
+    path: Assets/EndScreen.unity
+    guid: 455e19e5898f0324eb448a5ab021a414

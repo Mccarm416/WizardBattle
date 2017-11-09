@@ -1,5 +1,5 @@
 sceneSetups:
-- path: Assets/MainMenu.unity
+- path: Assets/TitleScreen.unity
   isLoaded: 0
   isActive: 0
 - path: Assets/WizardBattle.unity
