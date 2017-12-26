@@ -20,9 +20,10 @@ public class DamageCalculator : MonoBehaviour {
 
 	public int missileHit() {
 		//Basic attack
-		int baseDamage = 5;
+		int baseDamage = 20;
 		int totalDamage = 0;
 		totalDamage = baseDamage;
 		return totalDamage;
 	}
+		
 }

@@ -17,6 +17,7 @@ public class Player1Controller : MonoBehaviour {
 	private Vector2 _currentPos;
 
 	private float nextShot = 0.0f;
+	private int missileSpeed; //Speed at which the missile moves
 	private float moveHorizontal;
 	private float moveVertical;
 	private Vector2 newPos;
@@ -37,6 +38,7 @@ public class Player1Controller : MonoBehaviour {
 	public int hitsTaken { get; set; }
 	public float Speed { get; set; }
 
+
 	//Death variables
 	bool dying;
 	public AudioClip deathSound;
@@ -47,7 +49,8 @@ public class Player1Controller : MonoBehaviour {
 		enabled = true;
 		Speed = 200f;
 		fireRate = 0.7f;
-		Health = 5;
+		missileSpeed = 500;
+		Health = 100;
 		animator = GetComponent<Animator> ();
 		camera = Camera.main;
 		dying = false;
@@ -163,6 +166,7 @@ public class Player1Controller : MonoBehaviour {
 
 	public void Shoot() {
 		if (Time.time > nextShot) {
+			Debug.Log ("P1 Shooting");
 			//Get position
 			_transform = gameObject.GetComponent<Transform> ();
 			_currentPos = _transform.position;
@@ -173,7 +177,12 @@ public class Player1Controller : MonoBehaviour {
 			direction.Normalize();
 			//Create the projectile and fire it
 			GameObject projectile = (GameObject)Instantiate (spell, _currentPos, Quaternion.identity);
-			projectile.GetComponent<Rigidbody2D>().velocity = direction * 500;
+			//Calculate the angle for missile rotation
+			float angle = Mathf.Atan2 (direction.y, direction.x) * Mathf.Rad2Deg;
+			//Rotate the missile
+			projectile.transform.rotation = Quaternion.AngleAxis (angle, Vector3.forward);
+			//Missile speed and direction calculation
+			projectile.GetComponent<Rigidbody2D>().velocity = direction * missileSpeed;
 			//Cooldown
 			nextShot = Time.time + fireRate;
 		}
@@ -196,6 +205,7 @@ public class Player1Controller : MonoBehaviour {
 	}
 
 	void MoveCamera() {
+		//Method used to move the camera and zoom it up to the player when they die
 		dying = true;
 		Debug.Log ("Death time: " + Time.time);
 		AudioSource cameraAudio = camera.GetComponent<AudioSource> ();
@@ -203,7 +213,7 @@ public class Player1Controller : MonoBehaviour {
 		//Move the camera
 		camera.transform.position = new Vector3 (transform.position.x, transform.position.y+10, -10);
 		Debug.Log ("Camera moved");
-		//Changes the cameras resolution to zoom in on the dying player
+		//Increases the cameras resolution to zoom in on the dying player
 		camera.orthographicSize = Mathf.Lerp (520, 60, 20);
 		Time.timeScale = 1f;
 		cameraAudio.clip = deathSound;

@@ -212,7 +212,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 373728237}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -158, z: 0}
+  m_LocalPosition: {x: 0, y: -222.99998, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 50695569}
@@ -221,7 +221,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -158}
+  m_AnchoredPosition: {x: 0, y: -223}
   m_SizeDelta: {x: 380.8, y: 100.6}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &373728239
@@ -318,7 +318,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 5b5955a2c5a20b64dbd73ee09f7be000, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -497,13 +497,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playBtn: {fileID: 373728239}
-  music01: {fileID: 8300000, guid: eed7bb4a0ab162a44a47d45a1b902d48, type: 3}
-  music02: {fileID: 8300000, guid: 75df5a40d4f80e04dbdaf045e9346198, type: 3}
-  music03: {fileID: 8300000, guid: da8ec53135fa2454081c1f7d5f462d82, type: 3}
-  music04: {fileID: 8300000, guid: 40223a21e11184a4994c11ad4ac78fdd, type: 3}
-  playBtnSnd01: {fileID: 8300000, guid: b8f06d50f117b2b42a7cf6d1b27b9f35, type: 3}
-  playBtnSnd02: {fileID: 8300000, guid: b8753db59ad99e149b4aaf04386d81c6, type: 3}
-  playBtnSnd03: {fileID: 8300000, guid: 5b5955a2c5a20b64dbd73ee09f7be000, type: 3}
+  music01: {fileID: 0}
+  playBtnSnd0: {fileID: 0}
 --- !u!82 &1082225682
 AudioSource:
   m_ObjectHideFlags: 0
@@ -513,7 +508,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: eed7bb4a0ab162a44a47d45a1b902d48, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 0.6
   m_Pitch: 1

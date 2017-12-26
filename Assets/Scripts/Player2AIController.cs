@@ -25,6 +25,7 @@ public class Player2AIController : MonoBehaviour {
 	private float distance; //Distance from AI to player
 	private Vector2 enemyPos; //Co-ordinates of the enemy player
 	private float nextShot; //Countdown until next shot.
+	private int missileSpeed; //Speed at which the missile moves
 	private Player1Controller player1;
 	private Vector2 travelPos; //AIs next positon
 	private float rightX = 685f;
@@ -49,7 +50,8 @@ public class Player2AIController : MonoBehaviour {
 		enabled = true;
 		Speed = 180f;
 		fireRate = 1f;
-		Health = 5;
+		missileSpeed = 500;
+		Health = 100;
 		animator = GetComponent<Animator> ();
 		camera = Camera.main;
 		dying = false;
@@ -89,6 +91,7 @@ public class Player2AIController : MonoBehaviour {
 			CheckBoundary ();
 			_transform.Translate (travelPos.x * Speed * Time.deltaTime, 0f, 0f);
 			_transform.Translate (0f, travelPos.y * Speed * Time.deltaTime, 0f);
+			animator.SetBool ("playerMove", true);
 		} 
 		else if ((distance - idealDistance) < idealDistance - deadArea) {
 			//Move away
@@ -97,17 +100,11 @@ public class Player2AIController : MonoBehaviour {
 			CheckBoundary ();
 			_transform.Translate (travelPos.x * Speed * Time.deltaTime, 0f, 0f);
 			_transform.Translate (0f, travelPos.y * Speed * Time.deltaTime, 0f);
+			animator.SetBool ("playerMove", true);
 		}
 		else {
-			/*
-			 * Working on a circling mechanism
-			 * 
-			_currentPos.Normalize ();
-			travelPos = new Vector2 (_currentPos.x + _currentPos.x, _currentPos.y + _currentPos.y);
-
-			_transform.Translate (travelPos.x * Speed * Time.deltaTime, 0f, 0f);
-			_transform.Translate (0f, travelPos.y * Speed * Time.deltaTime, 0f);
-			*/
+			//Player is in the deadzone
+			animator.SetBool ("playerMove", false);
 		}
 	}
 
@@ -133,6 +130,7 @@ public class Player2AIController : MonoBehaviour {
 
 	public void Shoot() {
 		if (Time.time > nextShot) {
+			Debug.Log ("P2 Shooting");
 			//Get position
 			_transform = gameObject.GetComponent<Transform> ();
 			_currentPos = _transform.position;
@@ -143,11 +141,14 @@ public class Player2AIController : MonoBehaviour {
 			direction.Normalize();
 			//Create the projectile and fire it
 			GameObject projectile = (GameObject)Instantiate (spell, _currentPos, Quaternion.identity);
-			projectile.GetComponent<Rigidbody2D>().velocity = direction * 250;
+			//Calculate the angle for missile rotation
+			float angle = Mathf.Atan2 (direction.y, direction.x) * Mathf.Rad2Deg;
+			//Rotate the missile
+			projectile.transform.rotation = Quaternion.AngleAxis (angle, Vector3.forward);
+			projectile.GetComponent<Rigidbody2D>().velocity = direction * missileSpeed;
 			//Cooldown
 			nextShot = Time.time + fireRate;
 		}
-
 	}
 
 	//Collision methods
@@ -195,12 +196,10 @@ public class Player2AIController : MonoBehaviour {
 		Player2AIController player2 = GetComponent<Player2AIController> ();
 		EndScreenController.player1 = player1;
 		EndScreenController.player2 = player2;
-
 		//Stop the players from moving and shooting
 		player2.Speed = 0f;
 		player2.fireRate = 0f;
 		Destroy (player1.gameObject);
-
 		//Stop all sound then start the cinematic death
 		StopSound();
 		MoveCamera();
@@ -208,13 +207,14 @@ public class Player2AIController : MonoBehaviour {
 	}
 
 	void MoveCamera() {
+		//Method used to move the camera and zoom it up to the player when they die
 		dying = true;
 		Debug.Log ("Death time: " + Time.time);
 		AudioSource cameraAudio = camera.GetComponent<AudioSource> ();
 		Debug.Log ("MoveCamera()");
 		camera.transform.position = new Vector3 (transform.position.x, transform.position.y+10, -10);
 		Debug.Log ("Camera moved");
-		//Changes the cameras resolution to zoom in on the dying player
+		//Increases the cameras resolution to zoom in on the dying player
 		camera.orthographicSize = Mathf.Lerp (520, 60, 20);
 		Time.timeScale = 1f;
 		cameraAudio.clip = deathSound;

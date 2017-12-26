@@ -14,6 +14,7 @@ public class MissileController : MonoBehaviour {
 	private AudioSource audioSrc;
 
 
+
 	void Start () {
 		
 		Player1Controller player1;
@@ -65,6 +66,7 @@ public class MissileController : MonoBehaviour {
 			StartCoroutine (waitDestroy ());
 		}			
 		else if (other.gameObject.tag.Equals("border")){
+			Debug.Log ("Missile -> Border");
 			Destroy (gameObject);
 		}
 
