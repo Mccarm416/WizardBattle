@@ -2,6 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/*
+ * Class responsible for controlling player 2 character. Holds their player values as well as methods for AI, movement/boundaries, animations, shooting/targeting, death event, and collisions.
+ */
+
 public class Player2AIController : MonoBehaviour {
 	//AI script
 
@@ -51,7 +55,7 @@ public class Player2AIController : MonoBehaviour {
 		Speed = 180f;
 		fireRate = 1f;
 		missileSpeed = 500;
-		Health = 100;
+		Health = 1;
 		animator = GetComponent<Animator> ();
 		camera = Camera.main;
 		dying = false;

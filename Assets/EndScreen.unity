@@ -512,6 +512,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 521932060106ac6499e47812df98cec4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lblWinner: {fileID: 688711322}
   lblP1Hits: {fileID: 1950142638}
   lblP1HitsTaken: {fileID: 363475497}
   lblP1Health: {fileID: 1817041626}
@@ -845,7 +846,7 @@ GameObject:
   - component: {fileID: 688711323}
   - component: {fileID: 688711322}
   m_Layer: 5
-  m_Name: Text
+  m_Name: lblWinner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

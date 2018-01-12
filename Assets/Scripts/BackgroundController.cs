@@ -4,6 +4,10 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
+/*
+ * Class responsible for controlling all the UI elements, initiating the games countdown, sound, and pause menu functions.
+ */
+
 public class BackgroundController : MonoBehaviour {
 	//Gameplays UI and music controller
 
@@ -112,6 +116,7 @@ public class BackgroundController : MonoBehaviour {
 	public void btnRestartClick() {
 		//Restart the game
 		SceneManager.LoadScene(1);
+		Time.timeScale = 1f;
 	}
 
 	public void btnExitClick() {

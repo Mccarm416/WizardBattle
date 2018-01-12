@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+/*
+ * Class responsible for controlling player 1 character. Holds their player values as well as methods for movement/boundaries, animations, shooting, death event, and collisions.
+ */
+
 public class Player1Controller : MonoBehaviour {
 	//Used by first player
 

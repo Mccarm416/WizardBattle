@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/*
+ * Class responsible for missiles shot by the players. Controls their sound and destruction.
+ */
 public class MissileController : MonoBehaviour {
 
 	/*

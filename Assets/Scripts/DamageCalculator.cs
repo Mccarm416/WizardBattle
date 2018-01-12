@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DamageCalculator : MonoBehaviour {
-	//Handles damage calculations
+/*
+ * Class responsible for calculating the damage being dealt to a player
+ */
 
+public class DamageCalculator : MonoBehaviour {
 
 	public int calculateDamage(Collision2D spell) {
 		//Calculates the type of spell, then gives the damage to the caller
