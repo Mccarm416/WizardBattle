@@ -1,0 +1,5 @@
+Wizard Battle v1.02
+
+Misc.
+
+- Added changelogs to the project folder under 'Changelogs'

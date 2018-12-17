@@ -55,7 +55,7 @@ public class BackgroundController : MonoBehaviour {
 
 	void Update () {
 		initialiseUI ();
-		if (Input.GetKeyDown (KeyCode.Escape)) {
+		if (Input.GetKeyDown (KeyCode.Escape) || Input.GetKeyDown("joystick button 7")) {
 			PauseMenu ();
 		}
 	}
@@ -71,7 +71,6 @@ public class BackgroundController : MonoBehaviour {
 
 	IEnumerator ReadyFight() {
 		//Ready... Fight! played at start of round
-		Debug.Log("Starting ReadyFight()");
 		AudioSource aS = GameObject.Find ("panelReady").GetComponent<AudioSource>();
 		aS.enabled = true;
 		aS.clip = audioReady;
@@ -86,7 +85,6 @@ public class BackgroundController : MonoBehaviour {
 		panelReady.CrossFadeAlpha (0f, 0.3f, false);
 		player1.enable();
 		player2.enable ();
-		Debug.Log ("Players enabled");
 		aS.clip = audioGo;
 		aS.Play ();
 		lblReady.enabled = false;
@@ -96,16 +94,13 @@ public class BackgroundController : MonoBehaviour {
 		lblHealthP2.enabled = true;
 		lblHealthTextP2.enabled = true;
 		gameStart = true;
-		Debug.Log ("Labels switched. Waiting 1 second");
 		yield return new WaitForSeconds (1.4f);
 		lblGo.enabled = false;
-		Debug.Log ("lblGo disabled. End of ReadyFight() and destroying panelReady");
 		Destroy(GameObject.Find("panelReady"));
 	}
 
 	public void btnResumeClick() {
 		//Resume gameplay
-		Debug.Log("Resume clicked");
 		Time.timeScale = 1f;
 		audioSrc.enabled = true;
 		audioSrc.Play ();
@@ -125,8 +120,7 @@ public class BackgroundController : MonoBehaviour {
 	}
 
 	public void PauseMenu() {
-		//Calls the pause menu. A buffer of 0.5s between menu calls is added to prevent accidental opening and closing.
-		Debug.Log ("PauseMenu() called, gameStart = " + gameStart);
+		//Calls the pause menu. A buffer of 0.5s is added between menu calls to prevent accidental opening and closing.
 		if (gameStart) {
 			if (lblGo != null && lblGo.isActiveAndEnabled == false) {
 				panelReady.enabled = false;

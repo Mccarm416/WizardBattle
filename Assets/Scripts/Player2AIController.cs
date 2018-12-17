@@ -55,7 +55,7 @@ public class Player2AIController : MonoBehaviour {
 		Speed = 180f;
 		fireRate = 1f;
 		missileSpeed = 500;
-		Health = 1;
+		Health = 100;
 		animator = GetComponent<Animator> ();
 		camera = Camera.main;
 		dying = false;
@@ -134,7 +134,6 @@ public class Player2AIController : MonoBehaviour {
 
 	public void Shoot() {
 		if (Time.time > nextShot) {
-			Debug.Log ("P2 Shooting");
 			//Get position
 			_transform = gameObject.GetComponent<Transform> ();
 			_currentPos = _transform.position;
@@ -163,7 +162,6 @@ public class Player2AIController : MonoBehaviour {
 			rBody.angularVelocity = 0f;
 		}
 		else if (other.gameObject.tag.Equals("border")) {
-			Debug.Log("P2 -> Border");
 			rBody.isKinematic = true;
 			rBody.velocity = Vector3.zero;
 			rBody.angularVelocity = 0f;
@@ -182,12 +180,10 @@ public class Player2AIController : MonoBehaviour {
 
 	public void OnCollisionExit2D(Collision2D other) {
 		if (other.gameObject.tag.Equals("player1")) {
-			Debug.Log("P2 -/> P1");
 			rBody.isKinematic = false;
 			Move ();
 		}
 		else if (other.gameObject.tag.Equals("border")) {
-			Debug.Log("P1 -/> Border");
 			rBody.isKinematic = false;
 			Move ();
 		}

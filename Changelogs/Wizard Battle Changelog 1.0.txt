@@ -1,0 +1,12 @@
+Update 9 - Wizard Battle 1.0
+
+- Added player 2 movement animation
+- Added new fireball sprite + animations for both players
+- Balanced sound
+- 'Start Game' button sound, in-game music, and title screen music are no longer random and have fixed sounds/music
+- Health totals are now hidden during the 'Ready, Go!' screen before game start
+- Fixed error where you were able to pause before the game actually begins
+- Fixed the error where player 1's missiles were not being destroyed when hitting the game border
+- Removed unused assets from the game
+- Added exit button to pause menu and end screen
+- Added restart button to end screen

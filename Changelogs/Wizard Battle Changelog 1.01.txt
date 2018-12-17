@@ -1,0 +1,20 @@
+Wizard Battle v1.01
+
+Features
+
+- Added Main Menu
+- Added Credits
+- Added Options Menu placeholder
+
+Bugs
+
+- Pause menu buttons are perfectly aligned
+- Health labels and totals are more symmetrical/aligned
+- Fixed issue with timescale not being reset properly when restarting the game from the pause menu.
+this caused the game to not continue when the scene reloaded.
+- Can now click through the 'Go' text at the start to hit pause menu buttons
+- End screen now displays the actual winner
+
+Misc.
+
+- Improved commenting

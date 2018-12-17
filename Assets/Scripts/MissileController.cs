@@ -5,7 +5,7 @@ using UnityEngine;
 /*
  * Class responsible for missiles shot by the players. Controls their sound and destruction.
  */
-public class MissileController : MonoBehaviour {
+public class MissileController : Spell {
 
 	/*
 	private Transform _transform;
@@ -15,11 +15,10 @@ public class MissileController : MonoBehaviour {
 	public AudioClip fizzle;
 	public AudioClip hit;
 	private AudioSource audioSrc;
-
-
+    private Player caster;
 
 	void Start () {
-		
+        
 		Player1Controller player1;
 		Player2AIController player2;
 		audioSrc = GetComponent<AudioSource> ();
@@ -54,7 +53,7 @@ public class MissileController : MonoBehaviour {
 		*/
 	}
 
-	public void OnCollisionEnter2D(Collision2D other) {
+	protected override void OnCollisionEnter2D(Collision2D other) {
 		if (other.gameObject.GetComponent <MissileController>() != null) {
 			audioSrc.enabled = true;
 			audioSrc.clip = fizzle;
@@ -69,7 +68,6 @@ public class MissileController : MonoBehaviour {
 			StartCoroutine (waitDestroy ());
 		}			
 		else if (other.gameObject.tag.Equals("border")){
-			Debug.Log ("Missile -> Border");
 			Destroy (gameObject);
 		}
 

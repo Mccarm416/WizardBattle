@@ -7,22 +7,27 @@ using UnityEngine.SceneManagement;
  * Class responsible for controlling player 1 character. Holds their player values as well as methods for movement/boundaries, animations, shooting, death event, and collisions.
  */
 
-public class Player1Controller : MonoBehaviour {
+public class Player1Controller : Player { 
 	//Used by first player
 
 	private float rightX = 685f;
 	private float leftX = -685f;
 	private float topY = 372f;
 	private float botY = -372f;
-	public GameObject spell;
-	DamageCalculator damageCalc;
 	private Rigidbody2D rBody;
 	private Transform _transform;
 	private Vector2 _currentPos;
 
 	private float nextShot = 0.0f;
 	private int missileSpeed; //Speed at which the missile moves
-	private float moveHorizontal;
+    public GameObject spell;
+    DamageCalculator damageCalc;
+
+
+
+
+
+    private float moveHorizontal;
 	private float moveVertical;
 	private Vector2 newPos;
 	private AudioSource playerAudio;
@@ -76,8 +81,12 @@ public class Player1Controller : MonoBehaviour {
 		if (!dying && enabled) {
 			//Move and shoot
 			Move ();
-			if (Input.GetKey (KeyCode.Space)) {
+			if (Input.GetButton("Fire1") || Input.GetAxis("Right Trigger") > 0) {
 				Shoot ();
+			}
+			if (Input.GetKeyDown (KeyCode.Q)) {
+				Debug.Log ("Fire Lion");
+                fireLion();
 			}
 		} 
 		else if (dying) {
@@ -87,7 +96,7 @@ public class Player1Controller : MonoBehaviour {
 	}
 
 
-	void Move() {
+	protected override void Move() {
 		//Controls player movement
 		//Get player input
 		moveHorizontal = Input.GetAxis ("Horizontal");
@@ -162,7 +171,6 @@ public class Player1Controller : MonoBehaviour {
 			Move ();
 		}
 		else if (other.gameObject.tag.Equals("border")) {
-			Debug.Log("P1 -/> Border");
 			rBody.isKinematic = false;
 			Move ();
 		}
@@ -170,26 +178,51 @@ public class Player1Controller : MonoBehaviour {
 
 	public void Shoot() {
 		if (Time.time > nextShot) {
-			Debug.Log ("P1 Shooting");
-			//Get position
-			_transform = gameObject.GetComponent<Transform> ();
-			_currentPos = _transform.position;
-			//Get mouse location
-			Vector2 mousePos = Camera.main.ScreenToWorldPoint (Input.mousePosition);	
-			//Determine the direction than normalize (vector becomes a magnitude of 1)
-			Vector2 direction = mousePos - _currentPos;
-			direction.Normalize();
-			//Create the projectile and fire it
-			GameObject projectile = (GameObject)Instantiate (spell, _currentPos, Quaternion.identity);
-			//Calculate the angle for missile rotation
-			float angle = Mathf.Atan2 (direction.y, direction.x) * Mathf.Rad2Deg;
-			//Rotate the missile
-			projectile.transform.rotation = Quaternion.AngleAxis (angle, Vector3.forward);
-			//Missile speed and direction calculation
-			projectile.GetComponent<Rigidbody2D>().velocity = direction * missileSpeed;
-			//Cooldown
-			nextShot = Time.time + fireRate;
+			if (Input.GetAxis ("Right Trigger") == 0) {
+				//Get position
+				_transform = gameObject.GetComponent<Transform> ();
+				_currentPos = _transform.position;
+				//Get mouse location
+				Vector2 mousePos = Camera.main.ScreenToWorldPoint (Input.mousePosition);	
+				//Determine the direction than normalize (vector becomes a magnitude of 1)
+				Vector2 direction = mousePos - _currentPos;
+				direction.Normalize ();
+				//Create the projectile and fire it
+				GameObject projectile = (GameObject)Instantiate (spell, _currentPos, Quaternion.identity);
+				//Calculate the angle for missile rotation
+				float angle = Mathf.Atan2 (direction.y, direction.x) * Mathf.Rad2Deg;
+				//Rotate the missile
+				projectile.transform.rotation = Quaternion.AngleAxis (angle, Vector3.forward);
+				//Missile speed and direction calculation
+				projectile.GetComponent<Rigidbody2D> ().velocity = direction * missileSpeed;
+				//Cooldown
+				nextShot = Time.time + fireRate;
+			}
+			else {
+				//Get position
+				_transform = gameObject.GetComponent<Transform> ();
+				_currentPos = _transform.position;
+				//Get mouse location
+				float rsHorPos = Input.GetAxis("Right Stick Horizontal");
+				float rsVerPos = Input.GetAxis ("Right Stick Vertical");
+				Vector2 rsPos = new Vector2(rsHorPos, rsVerPos);	
+				//Create the projectile and fire it
+				GameObject projectile = (GameObject)Instantiate (spell, _currentPos, Quaternion.identity);
+				//Calculate the angle for missile rotation
+				float angle = Mathf.Atan2 (rsPos.y, rsPos.x) * Mathf.Rad2Deg;
+				//Rotate the missile
+				projectile.transform.rotation = Quaternion.AngleAxis (angle, Vector3.forward);
+				//Missile speed and direction calculation
+				projectile.GetComponent<Rigidbody2D> ().velocity = rsPos * missileSpeed;
+				//Cooldown
+				nextShot = Time.time + fireRate;
+			}
+		
 		}
+	}
+
+	public void fireLion() {
+        Vector2 castPos = _currentPos;
 	}
 
 	public void Death() {
@@ -211,12 +244,9 @@ public class Player1Controller : MonoBehaviour {
 	void MoveCamera() {
 		//Method used to move the camera and zoom it up to the player when they die
 		dying = true;
-		Debug.Log ("Death time: " + Time.time);
 		AudioSource cameraAudio = camera.GetComponent<AudioSource> ();
-		Debug.Log ("MoveCamera()");
 		//Move the camera
 		camera.transform.position = new Vector3 (transform.position.x, transform.position.y+10, -10);
-		Debug.Log ("Camera moved");
 		//Increases the cameras resolution to zoom in on the dying player
 		camera.orthographicSize = Mathf.Lerp (520, 60, 20);
 		Time.timeScale = 1f;
@@ -229,7 +259,6 @@ public class Player1Controller : MonoBehaviour {
 		//Decide the death scream to use
 
 		//Generate a random number between 1-2 to select a death scream
-		Debug.Log ("Deciding death scream");
 		int randomScream = Random.Range (1, 3);
 		playerAudio = GetComponent<AudioSource> ();
 		if (randomScream == 1) {
@@ -244,10 +273,8 @@ public class Player1Controller : MonoBehaviour {
 		//Wait 1 second then play the death scream
 		yield return new WaitForSeconds (1.9f);
 		playerAudio.Play ();
-		Debug.Log ("1st return " + Time.time);
 		//Wait 5 seconds then load the end screen
 		yield return new WaitForSeconds (5f);
-		Debug.Log ("End Screen time: " + Time.time);
 		SceneManager.LoadScene(2);
 	}
 
