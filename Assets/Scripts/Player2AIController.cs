@@ -52,7 +52,7 @@ public class Player2AIController : MonoBehaviour {
 
 	void Start () {
 		enabled = true;
-		Speed = 180f;
+		Speed = 0f;
 		fireRate = 1f;
 		missileSpeed = 500;
 		Health = 100;
@@ -76,7 +76,7 @@ public class Player2AIController : MonoBehaviour {
 			_currentPos = _transform.position;
 			enemyPos = player1.transform.position;
 			Move ();
-			Shoot ();
+			//Shoot ();
 		}
 		else if (dying){
 			camera.transform.position = new Vector3 (transform.position.x, transform.position.y + 10, -10);
@@ -279,4 +279,14 @@ public class Player2AIController : MonoBehaviour {
 			Debug.Log ("Player 2 is already enabled");
 		}
 	}
+
+    void onTakeDamage(int damage)
+    {
+        Health = Health - damage;
+        hitsTaken++;
+        if (Health <= 0)
+        {
+            Death();
+        }
+    }
 }

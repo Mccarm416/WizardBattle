@@ -325,8 +325,10 @@
     <Compile Include="Assets\Scripts\Player2AIController.cs" />
     <Compile Include="Assets\Scripts\Player2Controller.cs" />
     <Compile Include="Assets\Scripts\Spells\Aim.cs" />
+    <Compile Include="Assets\Scripts\Spells\BasicAttack.cs" />
     <Compile Include="Assets\Scripts\Spells\Cast.cs" />
     <Compile Include="Assets\Scripts\Spells\FireLion.cs" />
+    <Compile Include="Assets\Scripts\Spells\Priority.cs" />
     <Compile Include="Assets\Scripts\Spells\Spell.cs" />
     <Compile Include="Assets\Scripts\TitleScreenController.cs" />
   </ItemGroup>

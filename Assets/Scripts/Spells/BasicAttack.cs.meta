@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 1a691869754d5474f9467cf3fd094019
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - fizzle: {fileID: 8300000, guid: 4daba3db4e5db854aac94bbb609d34e2, type: 3}
+  - hit: {fileID: 8300000, guid: ff53514735c76314f8036f856b0d9b82, type: 3}
+  - spell: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

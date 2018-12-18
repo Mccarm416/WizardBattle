@@ -18,15 +18,7 @@ public class Player1Controller : Player {
 	private Transform _transform;
 	private Vector2 _currentPos;
 
-	private float nextShot = 0.0f;
-	private int missileSpeed; //Speed at which the missile moves
-    public GameObject spell;
     DamageCalculator damageCalc;
-
-
-
-
-
     private float moveHorizontal;
 	private float moveVertical;
 	private Vector2 newPos;
@@ -57,8 +49,6 @@ public class Player1Controller : Player {
 	void Start () {
 		enabled = true;
 		Speed = 200f;
-		fireRate = 0.7f;
-		missileSpeed = 500;
 		Health = 100;
 		animator = GetComponent<Animator> ();
 		camera = Camera.main;
@@ -82,11 +72,10 @@ public class Player1Controller : Player {
 			//Move and shoot
 			Move ();
 			if (Input.GetButton("Fire1") || Input.GetAxis("Right Trigger") > 0) {
-				Shoot ();
+				//Shoot ();
 			}
 			if (Input.GetKeyDown (KeyCode.Q)) {
-				Debug.Log ("Fire Lion");
-                fireLion();
+               // fireLion();
 			}
 		} 
 		else if (dying) {
@@ -153,16 +142,6 @@ public class Player1Controller : Player {
 			rBody.velocity = Vector3.zero;
 			rBody.angularVelocity = 0f;
 		}
-
-		else {
-			//The object is a spell
-			int damage = damageCalc.calculateDamage (other);
-			Health -= damage;
-			hitsTaken++;
-			if (Health <= 0){
-				Death();
-			}
-		}
 	}
 
 	public void OnCollisionExit2D(Collision2D other) {
@@ -176,54 +155,6 @@ public class Player1Controller : Player {
 		}
 	}
 
-	public void Shoot() {
-		if (Time.time > nextShot) {
-			if (Input.GetAxis ("Right Trigger") == 0) {
-				//Get position
-				_transform = gameObject.GetComponent<Transform> ();
-				_currentPos = _transform.position;
-				//Get mouse location
-				Vector2 mousePos = Camera.main.ScreenToWorldPoint (Input.mousePosition);	
-				//Determine the direction than normalize (vector becomes a magnitude of 1)
-				Vector2 direction = mousePos - _currentPos;
-				direction.Normalize ();
-				//Create the projectile and fire it
-				GameObject projectile = (GameObject)Instantiate (spell, _currentPos, Quaternion.identity);
-				//Calculate the angle for missile rotation
-				float angle = Mathf.Atan2 (direction.y, direction.x) * Mathf.Rad2Deg;
-				//Rotate the missile
-				projectile.transform.rotation = Quaternion.AngleAxis (angle, Vector3.forward);
-				//Missile speed and direction calculation
-				projectile.GetComponent<Rigidbody2D> ().velocity = direction * missileSpeed;
-				//Cooldown
-				nextShot = Time.time + fireRate;
-			}
-			else {
-				//Get position
-				_transform = gameObject.GetComponent<Transform> ();
-				_currentPos = _transform.position;
-				//Get mouse location
-				float rsHorPos = Input.GetAxis("Right Stick Horizontal");
-				float rsVerPos = Input.GetAxis ("Right Stick Vertical");
-				Vector2 rsPos = new Vector2(rsHorPos, rsVerPos);	
-				//Create the projectile and fire it
-				GameObject projectile = (GameObject)Instantiate (spell, _currentPos, Quaternion.identity);
-				//Calculate the angle for missile rotation
-				float angle = Mathf.Atan2 (rsPos.y, rsPos.x) * Mathf.Rad2Deg;
-				//Rotate the missile
-				projectile.transform.rotation = Quaternion.AngleAxis (angle, Vector3.forward);
-				//Missile speed and direction calculation
-				projectile.GetComponent<Rigidbody2D> ().velocity = rsPos * missileSpeed;
-				//Cooldown
-				nextShot = Time.time + fireRate;
-			}
-		
-		}
-	}
-
-	public void fireLion() {
-        Vector2 castPos = _currentPos;
-	}
 
 	public void Death() {
 		//Pass player controllers to the next scenes controller
@@ -311,4 +242,14 @@ public class Player1Controller : Player {
 			Debug.Log ("Player 1 is already enabled");
 		}
 	}
+
+    void onTakeDamage(int damage)
+    {
+        Health = Health - damage;
+        hitsTaken++;
+        if (Health <= 0)
+        {
+            Death();
+        }
+    }
 }

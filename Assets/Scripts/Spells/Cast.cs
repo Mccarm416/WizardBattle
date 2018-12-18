@@ -7,15 +7,14 @@ public class Cast : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Q))
+        if (Input.GetKeyDown(KeyCode.Q) || Input.GetButtonDown("Ability 1"))
         {
             //Fire Lion
-            Debug.Log("Cast - Fire Lion");
             SendMessage("castFireLion");
         }
         else if (Input.GetButtonDown("Fire1"))
         {
-            //Magic missile
+            SendMessage("castBasicAttack");
         }
     }
 }

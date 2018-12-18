@@ -19,6 +19,7 @@ GameObject:
   - component: {fileID: 6799320900611432457}
   - component: {fileID: 8363619553402366499}
   - component: {fileID: 8985982450969006143}
+  - component: {fileID: 1668714164209101444}
   m_Layer: 8
   m_Name: p1
   m_TagString: player1
@@ -332,8 +333,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5987e62fa51e376448c237ae4ef0e3f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  origin: {x: 0, y: 0}
-  spell: {fileID: 3121196478631063606, guid: d0af79b642b0b194c937c4c0bae7a90d, type: 3}
+  spell: {fileID: 0}
 --- !u!114 &8985982450969006143
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -346,3 +346,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66136b057b2b1bf41829cf69c723f92f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1668714164209101444
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2157937714699773660}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a691869754d5474f9467cf3fd094019, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fizzle: {fileID: 8300000, guid: 4daba3db4e5db854aac94bbb609d34e2, type: 3}
+  hit: {fileID: 8300000, guid: ff53514735c76314f8036f856b0d9b82, type: 3}
+  spell: {fileID: 1988264783837106, guid: 0bb3f053b37376542be51c74819bdb44, type: 3}

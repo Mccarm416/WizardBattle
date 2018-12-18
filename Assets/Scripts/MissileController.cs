@@ -81,7 +81,5 @@ public class MissileController : Spell {
 		yield return new WaitForSeconds (1f);
 		Destroy (gameObject);
 	}
-	// Update is called once per frame
-	void Update () {
-	}
+
 }
