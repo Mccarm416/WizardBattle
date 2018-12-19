@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 212306270363616472}
   - component: {fileID: 95620147028185830}
   - component: {fileID: 82183383942186726}
-  - component: {fileID: 114750687310644286}
   - component: {fileID: 50111804522057128}
+  - component: {fileID: 6957074572673134821}
   - component: {fileID: 60653324271664368}
   m_Layer: 0
   m_Name: p1Fireball
@@ -199,20 +199,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
---- !u!114 &114750687310644286
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1988264783837106}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 630df533a86399749aa4328adc65a047, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  fizzle: {fileID: 8300000, guid: 4daba3db4e5db854aac94bbb609d34e2, type: 3}
-  hit: {fileID: 8300000, guid: ff53514735c76314f8036f856b0d9b82, type: 3}
 --- !u!50 &50111804522057128
 Rigidbody2D:
   serializedVersion: 4
@@ -234,6 +220,22 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &6957074572673134821
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1988264783837106}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e68c14a241b023c49b50498aec11f7eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  priority: 0
+  caster: 
+  fizzle: {fileID: 8300000, guid: 4daba3db4e5db854aac94bbb609d34e2, type: 3}
+  hit: {fileID: 8300000, guid: ff53514735c76314f8036f856b0d9b82, type: 3}
 --- !u!60 &60653324271664368
 PolygonCollider2D:
   m_ObjectHideFlags: 0

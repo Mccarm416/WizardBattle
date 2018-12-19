@@ -9,7 +9,6 @@ using UnityEngine;
 public class Player2AIController : MonoBehaviour {
 	//AI script
 
-	DamageCalculator damageCalc;
 	Transform _transform;
 	Vector2 _currentPos;
 	Rigidbody2D rBody;
@@ -28,8 +27,6 @@ public class Player2AIController : MonoBehaviour {
 	private int offensiveCheck; //AI becomes more aggresive when this number is greater then their HP against the players(Not yet implemented)
 	private float distance; //Distance from AI to player
 	private Vector2 enemyPos; //Co-ordinates of the enemy player
-	private float nextShot; //Countdown until next shot.
-	private int missileSpeed; //Speed at which the missile moves
 	private Player1Controller player1;
 	private Vector2 travelPos; //AIs next positon
 	private float rightX = 685f;
@@ -42,8 +39,6 @@ public class Player2AIController : MonoBehaviour {
 	private float prevFR;
 	private float prevSpeed;
 
-	public GameObject spell;
-
 	//Death variables
 	bool dying;
 	public AudioClip deathSound;
@@ -52,17 +47,13 @@ public class Player2AIController : MonoBehaviour {
 
 	void Start () {
 		enabled = true;
-		Speed = 0f;
-		fireRate = 1f;
-		missileSpeed = 500;
+		Speed = 200f;
 		Health = 100;
 		animator = GetComponent<Animator> ();
 		camera = Camera.main;
 		dying = false;
-		damageCalc = gameObject.GetComponent<DamageCalculator>();
 		rBody = GetComponent<Rigidbody2D> ();
 		idealDistance = 200;
-		nextShot = 0.0f;
 		deadArea = 10;
 		player1 = GameObject.FindGameObjectWithTag("player1").GetComponent<Player1Controller> ();
 		rBody.freezeRotation = true;
@@ -75,7 +66,7 @@ public class Player2AIController : MonoBehaviour {
 			_transform = GetComponent<Transform> ();
 			_currentPos = _transform.position;
 			enemyPos = player1.transform.position;
-			Move ();
+			//Move ();
 			//Shoot ();
 		}
 		else if (dying){
@@ -133,26 +124,20 @@ public class Player2AIController : MonoBehaviour {
 	}
 
 	public void Shoot() {
-		if (Time.time > nextShot) {
-			//Get position
-			_transform = gameObject.GetComponent<Transform> ();
-			_currentPos = _transform.position;
-			//Get player location
-			Vector2 mousePos = player1.transform.position;	
-			//Determine the direction than normalize (vector becomes a magnitude of 1)
-			Vector2 direction = mousePos - _currentPos;
-			direction.Normalize();
-			//Create the projectile and fire it
-			GameObject projectile = (GameObject)Instantiate (spell, _currentPos, Quaternion.identity);
-			//Calculate the angle for missile rotation
-			float angle = Mathf.Atan2 (direction.y, direction.x) * Mathf.Rad2Deg;
-			//Rotate the missile
-			projectile.transform.rotation = Quaternion.AngleAxis (angle, Vector3.forward);
-			projectile.GetComponent<Rigidbody2D>().velocity = direction * missileSpeed;
-			//Cooldown
-			nextShot = Time.time + fireRate;
-		}
-	}
+        double basicAttackNS = GetComponent<CastBasicAttack>().nextShot;
+        double fireLionNS = GetComponent<CastFireLion>().nextShot;
+        if (fireLionNS < Time.time && distance <= 200)
+        {
+            Debug.Log("P2AIC - Casting Fire Lion");
+
+            gameObject.GetComponent<CastFireLion>().castFireLion();
+        }
+        else if (basicAttackNS < Time.time)
+        {
+            gameObject.GetComponent<CastBasicAttack>().castBasicAttack();
+
+        }
+    }
 
 	//Collision methods
 	public void OnCollisionEnter2D(Collision2D other) {
@@ -165,16 +150,6 @@ public class Player2AIController : MonoBehaviour {
 			rBody.isKinematic = true;
 			rBody.velocity = Vector3.zero;
 			rBody.angularVelocity = 0f;
-		}
-
-		else {
-			//The object is a spell
-			int damage = damageCalc.calculateDamage (other);
-			Health -= damage;
-			hitsTaken++;
-			if (Health <= 0) {
-				Death ();
-			}
 		}
 	}
 
@@ -282,6 +257,7 @@ public class Player2AIController : MonoBehaviour {
 
     void onTakeDamage(int damage)
     {
+        Debug.Log("P2 - onTakeDamage");
         Health = Health - damage;
         hitsTaken++;
         if (Health <= 0)

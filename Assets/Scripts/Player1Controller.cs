@@ -7,20 +7,13 @@ using UnityEngine.SceneManagement;
  * Class responsible for controlling player 1 character. Holds their player values as well as methods for movement/boundaries, animations, shooting, death event, and collisions.
  */
 
-public class Player1Controller : Player { 
-	//Used by first player
-
-	private float rightX = 685f;
-	private float leftX = -685f;
-	private float topY = 372f;
-	private float botY = -372f;
+public class Player1Controller : MonoBehaviour {
+    //Used by first player
+    MovementController movementController;
 	private Rigidbody2D rBody;
 	private Transform _transform;
 	private Vector2 _currentPos;
 
-    DamageCalculator damageCalc;
-    private float moveHorizontal;
-	private float moveVertical;
 	private Vector2 newPos;
 	private AudioSource playerAudio;
 	private Camera camera;
@@ -31,13 +24,13 @@ public class Player1Controller : Player {
 
 	private bool isEnabled { get; set; }
 	private float prevFR;
-	private float prevSpeed;
+	private int prevSpeed;
 
 	public float fireRate { get; set; }
 	public int Health { get; set; }
 	public int hits { get; set; }
 	public int hitsTaken { get; set; }
-	public float Speed { get; set; }
+	public int Speed { get; set; }
 
 
 	//Death variables
@@ -48,7 +41,8 @@ public class Player1Controller : Player {
 
 	void Start () {
 		enabled = true;
-		Speed = 200f;
+        movementController = GetComponent<MovementController>();
+        Speed = 200;
 		Health = 100;
 		animator = GetComponent<Animator> ();
 		camera = Camera.main;
@@ -56,7 +50,6 @@ public class Player1Controller : Player {
 		rBody = GetComponent<Rigidbody2D> ();
 		_transform = gameObject.GetComponent<Transform> ();
 		_currentPos = _transform.position;
-		damageCalc = gameObject.GetComponent<DamageCalculator>();
 		hits = 0;
 		hitsTaken = 0;
 		player2 = GameObject.FindGameObjectWithTag("player2").GetComponent<Player2AIController> ();
@@ -69,14 +62,7 @@ public class Player1Controller : Player {
 		_currentPos = _transform.position;
 
 		if (!dying && enabled) {
-			//Move and shoot
-			Move ();
-			if (Input.GetButton("Fire1") || Input.GetAxis("Right Trigger") > 0) {
-				//Shoot ();
-			}
-			if (Input.GetKeyDown (KeyCode.Q)) {
-               // fireLion();
-			}
+            Move();
 		} 
 		else if (dying) {
 			//Check to see if the player is dying and if the camera should follow them
@@ -84,48 +70,10 @@ public class Player1Controller : Player {
 		}
 	}
 
-
-	protected override void Move() {
-		//Controls player movement
-		//Get player input
-		moveHorizontal = Input.GetAxis ("Horizontal");
-		moveVertical = Input.GetAxis ("Vertical");
-		//Check to see if player is running up against a screen boundary
-		CheckBoundary ();
-
-		//Calculating the new point to move to
-		newPos.x = moveHorizontal * Speed * Time.deltaTime;
-		newPos.y = moveVertical * Speed * Time.deltaTime;
-		//Check to see if movement animation should play (this should be snappier)
-		if (moveHorizontal != 0 || moveVertical != 0) {
-			animator.SetBool ("playerMove", true);
-		}
-		else {
-			animator.SetBool ("playerMove", false);
-		}
-		//Move to the new position
-		transform.Translate (newPos);
-	}
-
-	private void CheckBoundary() {
-		//Checks the players position against the camera boundary to prevent them from moving off of it
-		if (_currentPos.x + (moveHorizontal* Speed * Time.deltaTime) < leftX) {
-			Debug.Log ("curPos < leftX");
-			moveHorizontal = 0;
-		}
-		if (_currentPos.x + (moveHorizontal* Speed * Time.deltaTime) > rightX) {
-			Debug.Log ("curPos > rightX");
-			moveHorizontal = 0;
-		}
-		if (_currentPos.y + (moveVertical* Speed * Time.deltaTime) > topY) {
-			Debug.Log ("curPos > topY");
-			moveVertical = 0;
-		}
-		if (_currentPos.y + (moveVertical * Speed * Time.deltaTime) < botY) {
-			Debug.Log ("curPos < botY");
-			moveVertical = 0;
-		}
-	}
+    void Move()
+    {
+        movementController.Move(Speed);
+    }
 
 	//Collision methods
 	public void OnCollisionEnter2D(Collision2D other) {
@@ -163,7 +111,7 @@ public class Player1Controller : Player {
 		EndScreenController.player1 = player1;
 		EndScreenController.player2 = player2;
 		//Stop the players from moving and shooting
-		player1.Speed = 0f;
+		player1.Speed = 0;
 		player1.fireRate = 0f;
 		Destroy (player2.gameObject);
 		//Stop all sound then start the cinematic death
@@ -234,7 +182,8 @@ public class Player1Controller : Player {
 	public void enable() {
 		if (!enabled) {
 			Debug.Log ("Player 1 enabled");
-			Speed = prevSpeed;
+            gameObject.AddComponent<Cast>();
+            Speed = prevSpeed;
 			fireRate = prevFR;
 			enabled = true;
 		}

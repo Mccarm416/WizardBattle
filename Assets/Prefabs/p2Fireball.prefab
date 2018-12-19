@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 212198801613110466}
   - component: {fileID: 95433555228974276}
   - component: {fileID: 82988236243912580}
-  - component: {fileID: 114094297463128690}
   - component: {fileID: 50648040745576394}
   - component: {fileID: 60738946273646014}
+  - component: {fileID: 2713660982887141067}
   m_Layer: 0
   m_Name: p2Fireball
   m_TagString: spell
@@ -199,20 +199,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
---- !u!114 &114094297463128690
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1418361942013954}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 630df533a86399749aa4328adc65a047, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  fizzle: {fileID: 8300000, guid: 4daba3db4e5db854aac94bbb609d34e2, type: 3}
-  hit: {fileID: 8300000, guid: ff53514735c76314f8036f856b0d9b82, type: 3}
 --- !u!50 &50648040745576394
 Rigidbody2D:
   serializedVersion: 4
@@ -225,7 +211,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 0.5
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 0
@@ -269,3 +255,19 @@ PolygonCollider2D:
       - {x: 15.333229, y: -0.08528009}
       - {x: 14.602837, y: 5.8306327}
       - {x: 6.5164604, y: 13.395189}
+--- !u!114 &2713660982887141067
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1418361942013954}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e68c14a241b023c49b50498aec11f7eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  priority: 0
+  caster: 
+  fizzle: {fileID: 0}
+  hit: {fileID: 0}

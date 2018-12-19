@@ -58,6 +58,7 @@ public class BackgroundController : MonoBehaviour {
 		if (Input.GetKeyDown (KeyCode.Escape) || Input.GetKeyDown("joystick button 7")) {
 			PauseMenu ();
 		}
+        
 	}
 
 	public void initialiseUI() {

@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 4948472735298988839}
   - component: {fileID: 78255313383627714}
   - component: {fileID: 5049456672337141439}
-  - component: {fileID: 3121196478631063606}
   - component: {fileID: 2401639467307437796}
   - component: {fileID: 4302338967990402852}
+  - component: {fileID: 8567730319149997283}
   m_Layer: 0
   m_Name: fireLion
   m_TagString: spell
@@ -129,19 +129,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 14.330093, y: 16.944351}
   m_EdgeRadius: 0
---- !u!114 &3121196478631063606
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7440630950717084135}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5987e62fa51e376448c237ae4ef0e3f6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  spell: {fileID: 0}
 --- !u!82 &2401639467307437796
 AudioSource:
   m_ObjectHideFlags: 0
@@ -250,7 +237,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 7
   m_LinearDrag: 2
   m_AngularDrag: 2
   m_GravityScale: 0
@@ -258,4 +245,18 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
+--- !u!114 &8567730319149997283
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7440630950717084135}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c353cabd54c60940976d43b52b275a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  priority: 0
+  caster: 

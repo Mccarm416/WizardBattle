@@ -6,42 +6,54 @@ public class BasicAttack : Spell
 {
     public AudioClip fizzle;
     public AudioClip hit;
-    public GameObject spell;
 
-    private float speed = 500f;
-    private double cooldown = 0.5;
-    private double nextShot = 0;
-    private AudioSource audioSrc;
-    private Vector2 origin;
-    private string caster;
+    private int damage = 10;
 
-    void castBasicAttack()
+    void Start()
     {
-        if (nextShot < Time.time)
-        {
-            caster = gameObject.tag;
-            Aim aim = gameObject.GetComponent<Aim>();
-            Vector2 aimDirection = aim.aimDirection;
-            aimDirection.Normalize();
-            if (aimDirection != new Vector2(0, 0))
-            {
-                nextShot = Time.time + cooldown;
-                Vector2 playerPos = GetComponent<Transform>().position;
-                origin = aimDirection + playerPos;
-                GameObject basicAttack = Instantiate(spell, origin, Quaternion.identity) as GameObject;
-                float angle = Mathf.Atan2(aimDirection.y, aimDirection.x) * Mathf.Rad2Deg;
-                basicAttack.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
-                basicAttack.GetComponent<Rigidbody2D>().velocity = aimDirection * speed;
-            }
-        }
-
+        base.priority = 1;
     }
 
     protected override void OnCollisionEnter2D(Collision2D other)
     {
-        if (other.gameObject.tag.Equals("border"))
+        AudioSource audioSrc = GetComponent<AudioSource>();
+        //Enemy player hit
+        if (other.gameObject.tag == "player1" || other.gameObject.tag == "player2")
         {
-            Destroy(gameObject);
+            other.collider.SendMessage("onTakeDamage", damage);
+            audioSrc.enabled = true;
+            audioSrc.clip = hit;
+            audioSrc.volume = 1f;
+            audioSrc.Play();
+            StartCoroutine(waitDestroy());
+        }
+        //Hit spell
+        else if (other.gameObject.tag.Equals("spell"))
+        {
+            Spell hitSpell = other.gameObject.GetComponent<Spell>();
+            //Hit own spell
+            if (hitSpell.caster.Equals(base.caster))
+            {
+                Physics2D.IgnoreCollision(hitSpell.GetComponent<Collider2D>(), GetComponent<Collider2D>());
+                return;
+            }
+            else if (hitSpell.priority >= priority)
+            {
+                audioSrc.enabled = true;
+                audioSrc.clip = fizzle;
+                audioSrc.volume = 1f;
+                audioSrc.Play();
+                StartCoroutine(waitDestroy());
+            }
+        }
+
+        else if (other.gameObject.tag.Equals("border"))
+        {
+            audioSrc.enabled = true;
+            audioSrc.clip = fizzle;
+            audioSrc.volume = 1f;
+            audioSrc.Play();
+            StartCoroutine(waitDestroy());
         }
     }
 

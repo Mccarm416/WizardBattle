@@ -4,13 +4,11 @@ using UnityEngine;
 
 public class Player2Controller : MonoBehaviour {
 	//Will be used by second human player. Currently unused in this build.
-	DamageCalculator damageCalc;
 	Rigidbody2D rBody;
 	public float Speed { get; set; }
 	public int Health  { get; set; }
 
 	void Start () {
-		damageCalc = gameObject.GetComponent<DamageCalculator>();
 		rBody = GetComponent<Rigidbody2D> ();
 		Health = 100;
 		Speed = 200f;
@@ -32,13 +30,6 @@ public class Player2Controller : MonoBehaviour {
 			rBody.isKinematic = true;
 			rBody.velocity = Vector3.zero;
 			rBody.angularVelocity = 0f;
-		}
-
-		else {
-			//The object is a spell
-			int damage = damageCalc.calculateDamage (other);
-			Health -= damage;
-			Destroy (other.gameObject);
 		}
 	}
 }
