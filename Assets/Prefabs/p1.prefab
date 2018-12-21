@@ -101,6 +101,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14628690dff844846a16a1a925d30bea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Health: 0
+  hitsTaken: 0
+  hits: 0
   deathSound: {fileID: 8300000, guid: b8753db59ad99e149b4aaf04386d81c6, type: 3}
   death01: {fileID: 8300000, guid: cd8cce8ac97138d4ebabf8cf97b86cc1, type: 3}
   death02: {fileID: 8300000, guid: 0c5e325e92a832a4d9369d0c4442ba55, type: 3}

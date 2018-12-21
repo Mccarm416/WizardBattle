@@ -14,7 +14,6 @@ public class CastTornado : MonoBehaviour
 
     public void castTornado()
     {
-        Debug.Log("CastTornado - castTornado");
         if (nextShot <= Time.time)
         {
             nextShot = Time.time + cooldown;

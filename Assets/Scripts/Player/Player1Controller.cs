@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
  * Class responsible for controlling player 1 character. Holds their player values as well as methods for movement/boundaries, animations, shooting, death event, and collisions.
  */
 
-public class Player1Controller : MonoBehaviour {
+public class Player1Controller : Player {
     //Used by first player
     MovementController movementController;
 	private Rigidbody2D rBody;
@@ -27,9 +27,6 @@ public class Player1Controller : MonoBehaviour {
 	private int prevSpeed;
 
 	public float fireRate { get; set; }
-	public int Health { get; set; }
-	public int hits { get; set; }
-	public int hitsTaken { get; set; }
 	public int Speed { get; set; }
 
 
@@ -78,14 +75,12 @@ public class Player1Controller : MonoBehaviour {
 	//Collision methods
 	public void OnCollisionEnter2D(Collision2D other) {
 		if (other.gameObject.tag.Equals("player2")) {
-			Debug.Log("P1 -> P2");
 			rBody.isKinematic = true;
 			rBody.velocity = Vector3.zero;
 			rBody.angularVelocity = 0f;
 		}
 
 		else if (other.gameObject.tag.Equals("border")) {
-			Debug.Log("P1 -> Border");
 			rBody.isKinematic = true;
 			rBody.velocity = Vector3.zero;
 			rBody.angularVelocity = 0f;
@@ -166,30 +161,23 @@ public class Player1Controller : MonoBehaviour {
 		}
 	}
 
-	public void disable() {
+	public override void disable() {
 		if (enabled) {
 			prevSpeed = Speed;
 			prevFR = fireRate;
 			fireRate = 0;
 			Speed = 0;
 			enabled = false;
-			Debug.Log ("Player 1 disbaled");
-		}
-		else {
-			Debug.Log ("Player 1 is already disabled");
 		}
 	}
-	public void enable() {
+	public override void enable() {
 		if (!enabled) {
-			Debug.Log ("Player 1 enabled");
-            gameObject.AddComponent<Cast>();
+            gameObject.AddComponent<P1Cast>();
             Speed = prevSpeed;
 			fireRate = prevFR;
 			enabled = true;
 		}
-		else {
-			Debug.Log ("Player 1 is already enabled");
-		}
+
 	}
 
     void onTakeDamage(int damage)

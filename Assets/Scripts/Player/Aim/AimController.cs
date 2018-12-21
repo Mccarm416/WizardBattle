@@ -4,10 +4,6 @@ using UnityEngine;
 
 public class AimController : Aim
 {
-
-   
-
-    // Update is called once per frame
     void Update()
     {
         float rsHorPos = Input.GetAxis("Joy1 RightStickHorizontal");

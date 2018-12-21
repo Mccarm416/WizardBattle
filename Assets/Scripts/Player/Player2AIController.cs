@@ -6,16 +6,13 @@ using UnityEngine;
  * Class responsible for controlling player 2 character. Holds their player values as well as methods for AI, movement/boundaries, animations, shooting/targeting, death event, and collisions.
  */
 
-public class Player2AIController : MonoBehaviour {
+public class Player2AIController : Player {
 	//AI script
 
 	Transform _transform;
 	Vector2 _currentPos;
 	Rigidbody2D rBody;
-	public int Health  { get; set; }
 	public float Speed { get; set; }
-	public int hits { get; set; }
-	public int hitsTaken { get; set; }
 	public float fireRate {get; set;}
 	private Camera camera;
 	private AudioSource playerAudio;
@@ -230,7 +227,7 @@ public class Player2AIController : MonoBehaviour {
 		}
 	}
 
-	public void disable() {
+	public override void disable() {
 		if (enabled) {
 			prevSpeed = Speed;
 			prevFR = fireRate;
@@ -243,7 +240,7 @@ public class Player2AIController : MonoBehaviour {
 			Debug.Log ("Player 2 is already disabled");
 		}
 	}
-	public void enable() {
+	public override void enable() {
 		if (!enabled) {
 			Debug.Log ("Player 2 enabled");
 			Speed = prevSpeed;

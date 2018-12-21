@@ -18,8 +18,8 @@ public class BackgroundController : MonoBehaviour {
 	public Text lblHealthTextP2;
 	public int healthP1;
 	public int healthP2;
-	Player1Controller player1;
-	Player2AIController player2;
+	Player player1;
+	Player player2;
 
 	private float menuBuffer;
 	GameObject pauseMenu;
@@ -38,7 +38,7 @@ public class BackgroundController : MonoBehaviour {
 	void Start () {
 		//Get the player controller scripts
 		player1 = GameObject.FindGameObjectWithTag("player1").GetComponent<Player1Controller> ();
-		player2 = GameObject.FindGameObjectWithTag("player2").GetComponent <Player2AIController> ();
+		player2 = GameObject.FindGameObjectWithTag("player2").GetComponent <Player2Controller> ();
 		gameStart = false;
 		pauseMenu = GameObject.Find ("pauseMenuPanel");
 		pauseMenu.SetActive (false);

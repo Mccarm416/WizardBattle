@@ -10,8 +10,8 @@ using UnityEngine.SceneManagement;
 
 public class EndScreenController : MonoBehaviour {
 
-	public static Player1Controller player1;
-	public static Player2AIController player2;
+	public static Player player1;
+	public static Player player2;
 
 	public Text lblWinner;
 	public Text lblP1Hits;

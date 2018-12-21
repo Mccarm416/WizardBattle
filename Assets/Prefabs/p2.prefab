@@ -12,12 +12,15 @@ GameObject:
   - component: {fileID: 4228621813089847406}
   - component: {fileID: 4228621813089847404}
   - component: {fileID: 4228621813089847405}
-  - component: {fileID: 4228621813089847400}
   - component: {fileID: 4228621813089847402}
   - component: {fileID: 4228621813089847401}
-  - component: {fileID: 3731990600313078763}
   - component: {fileID: 8822180032165745545}
   - component: {fileID: 1982435922514432189}
+  - component: {fileID: 7087377797043062798}
+  - component: {fileID: 1158879777992951083}
+  - component: {fileID: 4175839539982495582}
+  - component: {fileID: 9211709013185509228}
+  - component: {fileID: 1232008301211308286}
   m_Layer: 9
   m_Name: p2
   m_TagString: player2
@@ -163,21 +166,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &4228621813089847400
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4228621813089847409}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c59ac3251d6a452468a2981bbf666e4e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  deathSound: {fileID: 8300000, guid: b8753db59ad99e149b4aaf04386d81c6, type: 3}
-  death01: {fileID: 8300000, guid: 0c5e325e92a832a4d9369d0c4442ba55, type: 3}
-  death02: {fileID: 8300000, guid: 53a97275d3fa3ae4ba24c39e147458d9, type: 3}
 --- !u!82 &4228621813089847402
 AudioSource:
   m_ObjectHideFlags: 0
@@ -293,19 +281,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &3731990600313078763
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4228621813089847409}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2232357bc1b01f547b5a56b407a2efbb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  aimDirection: {x: 0, y: 0}
 --- !u!114 &8822180032165745545
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -334,3 +309,77 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spell: {fileID: 7440630950717084135, guid: d0af79b642b0b194c937c4c0bae7a90d, type: 3}
   nextShot: 0
+--- !u!114 &7087377797043062798
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4228621813089847409}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c59ac3251d6a452468a2981bbf666e4e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Health: 0
+  hitsTaken: 0
+  hits: 0
+  deathSound: {fileID: 0}
+  death01: {fileID: 0}
+  death02: {fileID: 0}
+--- !u!114 &1158879777992951083
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4228621813089847409}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2232357bc1b01f547b5a56b407a2efbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  aimDirection: {x: 0, y: 0}
+--- !u!114 &4175839539982495582
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4228621813089847409}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6fe587dc66d6054b9ece004e75d8113, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &9211709013185509228
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4228621813089847409}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78425a063b4b3e44f8b91f4b753f0853, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Health: 0
+  hitsTaken: 0
+  hits: 0
+  deathSound: {fileID: 0}
+  death01: {fileID: 0}
+  death02: {fileID: 0}
+--- !u!114 &1232008301211308286
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4228621813089847409}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce35930d2a49d8a49995b2b79395791f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  aimDirection: {x: 0, y: 0}
