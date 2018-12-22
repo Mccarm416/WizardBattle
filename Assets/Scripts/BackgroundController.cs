@@ -18,8 +18,8 @@ public class BackgroundController : MonoBehaviour {
 	public Text lblHealthTextP2;
 	public int healthP1;
 	public int healthP2;
-	Player player1;
-	Player player2;
+	Player1Controller player1;
+	Player2Controller player2;
 
 	private float menuBuffer;
 	GameObject pauseMenu;

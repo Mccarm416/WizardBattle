@@ -18,16 +18,13 @@ public class Player1Controller : Player {
 	private AudioSource playerAudio;
 	private Camera camera;
 	private Animator animator;
-	private Player2AIController player2;
+	private Player2Controller player2;
 
 
 
 	private bool isEnabled { get; set; }
-	private float prevFR;
 	private int prevSpeed;
 
-	public float fireRate { get; set; }
-	public int Speed { get; set; }
 
 
 	//Death variables
@@ -49,7 +46,7 @@ public class Player1Controller : Player {
 		_currentPos = _transform.position;
 		hits = 0;
 		hitsTaken = 0;
-		player2 = GameObject.FindGameObjectWithTag("player2").GetComponent<Player2AIController> ();
+		player2 = GameObject.FindGameObjectWithTag("player2").GetComponent<Player2Controller> ();
 
 	}
 
@@ -107,7 +104,6 @@ public class Player1Controller : Player {
 		EndScreenController.player2 = player2;
 		//Stop the players from moving and shooting
 		player1.Speed = 0;
-		player1.fireRate = 0f;
 		Destroy (player2.gameObject);
 		//Stop all sound then start the cinematic death
 		StopSound();
@@ -164,8 +160,6 @@ public class Player1Controller : Player {
 	public override void disable() {
 		if (enabled) {
 			prevSpeed = Speed;
-			prevFR = fireRate;
-			fireRate = 0;
 			Speed = 0;
 			enabled = false;
 		}
@@ -174,7 +168,6 @@ public class Player1Controller : Player {
 		if (!enabled) {
             gameObject.AddComponent<P1Cast>();
             Speed = prevSpeed;
-			fireRate = prevFR;
 			enabled = true;
 		}
 

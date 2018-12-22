@@ -114,7 +114,6 @@ public class Player2Controller : Player {
         EndScreenController.player2 = player2;
         //Stop the players from moving and shooting
         player1.Speed = 0;
-        player1.fireRate = 0f;
         Destroy(player1.gameObject);
         //Stop all sound then start the cinematic death
         StopSound();

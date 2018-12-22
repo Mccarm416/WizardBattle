@@ -7,6 +7,7 @@ public abstract class Player : MonoBehaviour
     public int Health;
     public int hitsTaken;
     public int hits;
+    public int Speed;
 
     public abstract void enable();
     public abstract void disable();

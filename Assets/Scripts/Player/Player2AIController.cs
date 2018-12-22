@@ -13,7 +13,6 @@ public class Player2AIController : Player {
 	Vector2 _currentPos;
 	Rigidbody2D rBody;
 	public float Speed { get; set; }
-	public float fireRate {get; set;}
 	private Camera camera;
 	private AudioSource playerAudio;
 
@@ -26,15 +25,10 @@ public class Player2AIController : Player {
 	private Vector2 enemyPos; //Co-ordinates of the enemy player
 	private Player1Controller player1;
 	private Vector2 travelPos; //AIs next positon
-	private float rightX = 685f;
-	private float leftX = -685f;
-	private float topY = 372f;
-	private float botY = -372f;
 	private Animator animator;
 
 	private bool isEnabled { get; set; }
-	private float prevFR;
-	private float prevSpeed;
+    private float prevSpeed;
 
 	//Death variables
 	bool dying;
@@ -80,7 +74,6 @@ public class Player2AIController : Player {
 			//Move closer
 			travelPos = new Vector2 (enemyPos.x - _currentPos.x, enemyPos.y - _currentPos.y);
 			travelPos.Normalize ();
-			CheckBoundary ();
 			_transform.Translate (travelPos.x * Speed * Time.deltaTime, 0f, 0f);
 			_transform.Translate (0f, travelPos.y * Speed * Time.deltaTime, 0f);
 			animator.SetBool ("playerMove", true);
@@ -89,7 +82,6 @@ public class Player2AIController : Player {
 			//Move away
 			travelPos = new Vector2 (enemyPos.x + _currentPos.x, enemyPos.y + _currentPos.y);
 			travelPos.Normalize ();
-			CheckBoundary ();
 			_transform.Translate (travelPos.x * Speed * Time.deltaTime, 0f, 0f);
 			_transform.Translate (0f, travelPos.y * Speed * Time.deltaTime, 0f);
 			animator.SetBool ("playerMove", true);
@@ -97,26 +89,6 @@ public class Player2AIController : Player {
 		else {
 			//Player is in the deadzone
 			animator.SetBool ("playerMove", false);
-		}
-	}
-
-	private void CheckBoundary() {
-		//Checks the players position against the camera boundary to prevent them from moving off of it
-		if (_currentPos.x + (travelPos.x * Speed * Time.deltaTime) < leftX) {
-			Debug.Log ("curPos < leftX");
-			travelPos.x = 0;
-		}
-		if (_currentPos.x + (travelPos.x * Speed * Time.deltaTime) > rightX) {
-			Debug.Log ("curPos > rightX");
-			travelPos.x = 0;
-		}
-		if (_currentPos.y + (travelPos.y * Speed * Time.deltaTime) > topY) {
-			Debug.Log ("curPos > topY");
-			travelPos.y = 0;
-		}
-		if (_currentPos.y + (travelPos.y * Speed * Time.deltaTime) < botY) {
-			Debug.Log ("curPos < botY");
-			travelPos.y = 0;
 		}
 	}
 
@@ -165,12 +137,11 @@ public class Player2AIController : Player {
 		//Pass player controllers to the next scenes controller
 		Destroy(GetComponent<PolygonCollider2D>());
 		Player1Controller player1 = GameObject.FindGameObjectWithTag("player1").GetComponent<Player1Controller> ();
-		Player2AIController player2 = GetComponent<Player2AIController> ();
+		Player2Controller player2 = GetComponent<Player2Controller> ();
 		EndScreenController.player1 = player1;
 		EndScreenController.player2 = player2;
 		//Stop the players from moving and shooting
-		player2.Speed = 0f;
-		player2.fireRate = 0f;
+		player2.Speed = 0;
 		Destroy (player1.gameObject);
 		//Stop all sound then start the cinematic death
 		StopSound();
@@ -230,8 +201,6 @@ public class Player2AIController : Player {
 	public override void disable() {
 		if (enabled) {
 			prevSpeed = Speed;
-			prevFR = fireRate;
-			fireRate = 0;
 			Speed = 0;
 			enabled = false;
 			Debug.Log ("Player 2 disabled");
@@ -244,7 +213,6 @@ public class Player2AIController : Player {
 		if (!enabled) {
 			Debug.Log ("Player 2 enabled");
 			Speed = prevSpeed;
-			fireRate = prevFR;
 			enabled = true;
 		}
 		else {
