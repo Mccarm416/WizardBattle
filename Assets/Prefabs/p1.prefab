@@ -77,7 +77,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: ab403c0f452faf14682c61ab594c9472, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -104,6 +104,7 @@ MonoBehaviour:
   Health: 0
   hitsTaken: 0
   hits: 0
+  Speed: 0
   deathSound: {fileID: 8300000, guid: b8753db59ad99e149b4aaf04386d81c6, type: 3}
   death01: {fileID: 8300000, guid: cd8cce8ac97138d4ebabf8cf97b86cc1, type: 3}
   death02: {fileID: 8300000, guid: 0c5e325e92a832a4d9369d0c4442ba55, type: 3}
