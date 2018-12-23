@@ -13,17 +13,11 @@ public class Player1Controller : Player {
 	private Rigidbody2D rBody;
 	private Transform _transform;
 	private Vector2 _currentPos;
-
-	private Vector2 newPos;
 	private AudioSource playerAudio;
 	private Camera camera;
 	private Animator animator;
 	private Player2Controller player2;
-
-
-
 	private bool isEnabled { get; set; }
-	private int prevSpeed;
 
 
 
@@ -36,7 +30,6 @@ public class Player1Controller : Player {
 	void Start () {
 		enabled = true;
         movementController = GetComponent<MovementController>();
-        Speed = 200;
 		Health = 100;
 		animator = GetComponent<Animator> ();
 		camera = Camera.main;
@@ -66,7 +59,7 @@ public class Player1Controller : Player {
 
     void Move()
     {
-        movementController.Move(Speed);
+        movementController.Move();
     }
 
 	//Collision methods
@@ -103,7 +96,6 @@ public class Player1Controller : Player {
 		EndScreenController.player1 = player1;
 		EndScreenController.player2 = player2;
 		//Stop the players from moving and shooting
-		player1.Speed = 0;
 		Destroy (player2.gameObject);
 		//Stop all sound then start the cinematic death
 		StopSound();
@@ -159,15 +151,12 @@ public class Player1Controller : Player {
 
 	public override void disable() {
 		if (enabled) {
-			prevSpeed = Speed;
-			Speed = 0;
 			enabled = false;
 		}
 	}
 	public override void enable() {
 		if (!enabled) {
             gameObject.AddComponent<P1Cast>();
-            Speed = prevSpeed;
 			enabled = true;
 		}
 

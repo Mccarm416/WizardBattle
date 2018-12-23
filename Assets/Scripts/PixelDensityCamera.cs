@@ -10,7 +10,7 @@ public class PixelDensityCamera : MonoBehaviour
 
     void Update()
     {
-        camera.orthographicSize = Screen.height / pixelsToUnits / 2;
+       // camera.orthographicSize = Screen.height / pixelsToUnits / 2;
 
     }
 }

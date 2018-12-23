@@ -9,21 +9,14 @@ public class Player2Controller : Player {
     private Rigidbody2D rBody;
     private Transform _transform;
     private Vector2 _currentPos;
-
-    private Vector2 newPos;
     private AudioSource playerAudio;
     private Camera camera;
     private Animator animator;
     private Player1Controller player1;
 
-
-
     private bool isEnabled { get; set; }
-    private float prevFR;
-    private int prevSpeed;
 
     public float fireRate { get; set; }
-    public int Speed { get; set; }
 
 
     //Death variables
@@ -36,7 +29,6 @@ public class Player2Controller : Player {
     {
         enabled = true;
         movementController = GetComponent<MovementController>();
-        Speed = 200;
         Health = 100;
         animator = GetComponent<Animator>();
         camera = Camera.main;
@@ -69,7 +61,7 @@ public class Player2Controller : Player {
 
     void Move()
     {
-        movementController.Move(Speed);
+        movementController.Move();
     }
 
     //Collision methods
@@ -112,8 +104,6 @@ public class Player2Controller : Player {
         Destroy(GetComponent<PolygonCollider2D>());
         EndScreenController.player1 = player1;
         EndScreenController.player2 = player2;
-        //Stop the players from moving and shooting
-        player1.Speed = 0;
         Destroy(player1.gameObject);
         //Stop all sound then start the cinematic death
         StopSound();
@@ -177,10 +167,6 @@ public class Player2Controller : Player {
     {
         if (enabled)
         {
-            prevSpeed = Speed;
-            prevFR = fireRate;
-            fireRate = 0;
-            Speed = 0;
             enabled = false;
         }
 
@@ -190,8 +176,6 @@ public class Player2Controller : Player {
         if (!enabled)
         {
             gameObject.AddComponent<P2Cast>();
-            Speed = prevSpeed;
-            fireRate = prevFR;
             enabled = true;
         }
 

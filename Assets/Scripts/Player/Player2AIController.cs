@@ -141,7 +141,6 @@ public class Player2AIController : Player {
 		EndScreenController.player1 = player1;
 		EndScreenController.player2 = player2;
 		//Stop the players from moving and shooting
-		player2.Speed = 0;
 		Destroy (player1.gameObject);
 		//Stop all sound then start the cinematic death
 		StopSound();

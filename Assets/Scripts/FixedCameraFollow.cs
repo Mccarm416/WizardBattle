@@ -18,9 +18,10 @@ public class FixedCameraFollow : MonoBehaviour
         player2 = GameObject.FindGameObjectWithTag("player2").GetComponent<Transform>();
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         float cameraMinSize = 300;
+        float cameraMaxSize = 460;
         float zoomFactor = 1f;
         float followTimeDelta = 0.15f;
 
@@ -28,8 +29,12 @@ public class FixedCameraFollow : MonoBehaviour
 
         //Distance between two players
         float distance = (player1.position - player2.position).magnitude;
+        distance = Mathf.Round(distance);
 
         Vector3 cameraDestination = midpoint - camera.transform.forward;
+        float x = Mathf.Round(cameraDestination.x);
+        float y = Mathf.Round(cameraDestination.y);
+        cameraDestination = new Vector3(x, y, -1);
 
 
         camera.transform.position = Vector3.Slerp(camera.transform.position, cameraDestination, followTimeDelta);
@@ -39,9 +44,13 @@ public class FixedCameraFollow : MonoBehaviour
             camera.transform.position = cameraDestination;
         }
 
-        if(distance <= cameraMinSize)
+        if(distance < cameraMinSize)
         {
             camera.orthographicSize = cameraMinSize;
+        }
+        else if( distance > cameraMaxSize)
+        {
+            camera.orthographicSize = cameraMaxSize;
         }
         else
         {

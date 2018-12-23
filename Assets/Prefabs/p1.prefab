@@ -20,6 +20,7 @@ GameObject:
   - component: {fileID: 1668714164209101444}
   - component: {fileID: 1346708105883610275}
   - component: {fileID: 5604244977389127525}
+  - component: {fileID: 5402728512297262596}
   m_Layer: 8
   m_Name: p1
   m_TagString: player1
@@ -104,7 +105,6 @@ MonoBehaviour:
   Health: 0
   hitsTaken: 0
   hits: 0
-  Speed: 0
   deathSound: {fileID: 8300000, guid: b8753db59ad99e149b4aaf04386d81c6, type: 3}
   death01: {fileID: 8300000, guid: cd8cce8ac97138d4ebabf8cf97b86cc1, type: 3}
   death02: {fileID: 8300000, guid: 0c5e325e92a832a4d9369d0c4442ba55, type: 3}
@@ -115,7 +115,7 @@ PolygonCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2157937714699773660}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
@@ -366,3 +366,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd6ede73ffc52a34f8a181b15642c7ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!70 &5402728512297262596
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2157937714699773660}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 1.7033768, y: 7.1920385}
+  m_Size: {x: 33, y: 58}
+  m_Direction: 0
