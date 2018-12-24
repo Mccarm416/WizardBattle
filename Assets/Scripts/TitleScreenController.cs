@@ -25,9 +25,17 @@ public class TitleScreenController : MonoBehaviour {
 	public Button btnCredits;
 	public Button btnFakeLaunch;
 
-	void Start () {
+    private TitleScreenControls titleScreenControls;
+    private List<Button> menuButtons = new List<Button>();
+
+
+    void Start () {
 		playBtnAudSrc = playBtn.GetComponent <AudioSource> ();
-		panelMainMenu = GameObject.Find ("panelMainMenu");
+        menuButtons.Add(btnLaunch);
+        menuButtons.Add(btnOptions);
+        menuButtons.Add(btnCredits);
+        titleScreenControls = GetComponent<TitleScreenControls>();
+        panelMainMenu = GameObject.Find ("panelMainMenu");
 		panelOptions = GameObject.Find ("panelOptions");
 		panelCredits = GameObject.Find ("panelCredits");
 		panelMainMenu.SetActive (false);
@@ -36,7 +44,12 @@ public class TitleScreenController : MonoBehaviour {
 		panelFade.enabled = false;
 	}
 
-	public void btnStartClick() {
+    private void Update()
+    {
+        titleScreenControls.getInput();
+    }
+
+    public void btnStartClick() {
 		Debug.Log ("Start clicked");
 		playBtnAudSrc.enabled = true;
 		playBtnAudSrc.Play ();

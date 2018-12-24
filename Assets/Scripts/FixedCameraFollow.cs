@@ -21,8 +21,7 @@ public class FixedCameraFollow : MonoBehaviour
     private void FixedUpdate()
     {
         float cameraMinSize = 300;
-        float cameraMaxSize = 460;
-        float zoomFactor = 1f;
+        float cameraMaxSize = 730;
         float followTimeDelta = 0.15f;
 
         Vector3 midpoint = (player1.position + player2.position) / 2f;

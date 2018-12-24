@@ -311,6 +311,8 @@
     <Compile Include="Assets\Scripts\Spells\Spell.cs" />
     <Compile Include="Assets\Scripts\Spells\Torndao.cs" />
     <Compile Include="Assets\Scripts\TitleScreenController.cs" />
+    <Compile Include="Assets\Scripts\TitleScreenControls.cs" />
+    <Compile Include="Assets\Scripts\UI\ButtonClick.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Packages\com.unity.package-manager-ui\Editor\Resources\Styles\Main_Dark.uss" />
