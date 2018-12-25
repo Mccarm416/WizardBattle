@@ -6,10 +6,12 @@ using UnityEngine.SceneManagement;
 [ExecuteInEditMode]
 public class FixedCameraFollow : MonoBehaviour
 {
-    Camera camera;
-    Transform player1;
-    Transform player2;
-
+    private Camera camera;
+    private Transform player1;
+    private Transform player2;
+    private float cameraMinSize = 400;
+    private float cameraMaxSize = 720;
+    private float followTimeDelta = 0.15f;
 
     void Start()
     {
@@ -20,9 +22,7 @@ public class FixedCameraFollow : MonoBehaviour
 
     private void FixedUpdate()
     {
-        float cameraMinSize = 300;
-        float cameraMaxSize = 730;
-        float followTimeDelta = 0.15f;
+
 
         Vector3 midpoint = (player1.position + player2.position) / 2f;
 
@@ -43,11 +43,12 @@ public class FixedCameraFollow : MonoBehaviour
             camera.transform.position = cameraDestination;
         }
 
+
         if(distance < cameraMinSize)
         {
             camera.orthographicSize = cameraMinSize;
         }
-        else if( distance > cameraMaxSize)
+        else if( distance> cameraMaxSize)
         {
             camera.orthographicSize = cameraMaxSize;
         }

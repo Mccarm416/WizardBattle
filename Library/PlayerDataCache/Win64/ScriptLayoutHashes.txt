@@ -117,7 +117,8 @@ a1280a8b42b0f462bd040d2f87c057f8 Assembly-CSharp.dll:.Torndao
 6023febd90a4ba73c7471ecd644b75ce Assembly-CSharp.dll:.Player2AIController
 06999031502a8f531463a25c6b2e512b Assembly-CSharp.dll:.EndScreenController
 6023febd90a4ba73c7471ecd644b75ce Assembly-CSharp.dll:.Player2Controller
-37e316ffb8639c6cd12e65e6dad421d6 Assembly-CSharp.dll:.TitleScreenController
+71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:.TitleScreenControls
+737f597624bb2677071fb872f4ad6a12 Assembly-CSharp.dll:.TitleScreenController
 2a891d788f5847e1736cc9b4d28abcc9 Assembly-CSharp.dll:.CastBasicAttack
 e6ae40841db498b6e673877ac45ad208 UnityEngine.Networking.dll:UnityEngine.Networking.NetworkAnimator
 71bb6a6b6c8f052f948db64c7dd3ca4f UnityEngine.Networking.dll:UnityEngine.Networking.NetworkBehaviour

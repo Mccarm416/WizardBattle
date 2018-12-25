@@ -10,9 +10,10 @@ public class P1Movement : MovementController
     private float moveVertical;
     private Animator animator;
     private Rigidbody2D rBody;
-    private int speed = 200;
+    public int speed;
     private void Start()
     {
+        speed = 200;
         animator = GetComponent<Animator>();
         rBody = GetComponent<Rigidbody2D>();
     }
@@ -25,7 +26,7 @@ public class P1Movement : MovementController
         //Calculating the new point to move to
         Vector2 movement = new Vector2(moveHorizontal, moveVertical);
         //movement.Normalize();
-        rBody.velocity = movement * speed;
+        rBody.AddForce(movement * speed);
         //Check to see if movement animation should play (this should be snappier)
         if (moveHorizontal != 0 || moveVertical != 0)
         {

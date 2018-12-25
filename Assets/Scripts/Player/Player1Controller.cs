@@ -9,7 +9,7 @@ using UnityEngine.SceneManagement;
 
 public class Player1Controller : Player {
     //Used by first player
-    MovementController movementController;
+    P1Movement movementController;
 	private Rigidbody2D rBody;
 	private Transform _transform;
 	private Vector2 _currentPos;
@@ -29,7 +29,7 @@ public class Player1Controller : Player {
 
 	void Start () {
 		enabled = true;
-        movementController = GetComponent<MovementController>();
+        movementController = GetComponent<P1Movement>();
 		Health = 100;
 		animator = GetComponent<Animator> ();
 		camera = Camera.main;
@@ -69,20 +69,10 @@ public class Player1Controller : Player {
 			rBody.velocity = Vector3.zero;
 			rBody.angularVelocity = 0f;
 		}
-
-		else if (other.gameObject.tag.Equals("border")) {
-			rBody.isKinematic = true;
-			rBody.velocity = Vector3.zero;
-			rBody.angularVelocity = 0f;
-		}
 	}
 
 	public void OnCollisionExit2D(Collision2D other) {
 		if (other.gameObject.tag.Equals("player2")) {
-			rBody.isKinematic = false;
-			Move ();
-		}
-		else if (other.gameObject.tag.Equals("border")) {
 			rBody.isKinematic = false;
 			Move ();
 		}

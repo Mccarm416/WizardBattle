@@ -25,5 +25,9 @@ public class P1Cast : Cast
         {
             gameObject.GetComponent<CastBasicAttack>().castBasicAttack();
         }
+        else if (Input.GetButtonDown("Joy1 A"))
+        {
+            gameObject.GetComponent<CastDodge>().castDodge();
+        }
     }
 }

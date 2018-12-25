@@ -546,7 +546,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &466844462
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -39257,7 +39257,7 @@ CompositeCollider2D:
   m_Offset: {x: 0, y: 0}
   m_GeometryType: 0
   m_GenerationType: 0
-  m_EdgeRadius: 5
+  m_EdgeRadius: 1
   m_ColliderPaths:
   - m_Collider: {fileID: 688365108}
     m_ColliderPaths:
@@ -41162,7 +41162,7 @@ CompositeCollider2D:
   m_Offset: {x: 0, y: 0}
   m_GeometryType: 0
   m_GenerationType: 0
-  m_EdgeRadius: 5
+  m_EdgeRadius: 1
   m_ColliderPaths:
   - m_Collider: {fileID: 1161798657}
     m_ColliderPaths:
@@ -66119,7 +66119,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 460
+  orthographic size: 300
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -66358,6 +66358,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_BodyType
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2157937714699773639, guid: 53a57843341b35549a8e70af89bf311d,
+        type: 3}
+      propertyPath: m_AngularDrag
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2157937714699773639, guid: 53a57843341b35549a8e70af89bf311d,
+        type: 3}
+      propertyPath: m_LinearDrag
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5604244977389127525, guid: 53a57843341b35549a8e70af89bf311d,
         type: 3}

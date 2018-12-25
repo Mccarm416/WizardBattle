@@ -27,6 +27,8 @@ public class CastTornado : MonoBehaviour
             float angle = Mathf.Atan2(aimDirection.y, aimDirection.x) * Mathf.Rad2Deg;
             torndao.transform.rotation = Quaternion.AngleAxis(0, Vector3.forward);
             aimDirection.Normalize();
+            torndao.GetComponent<Torndao>().aimDirection = aimDirection;
+            torndao.GetComponent<Torndao>().speed = speed;
             torndao.GetComponent<Rigidbody2D>().velocity = aimDirection * speed;
             //Destroy after animation
             Destroy(torndao, torndao.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);

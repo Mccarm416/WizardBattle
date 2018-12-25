@@ -6,10 +6,29 @@ using UnityEngine;
 public class Torndao : Spell
 {
     int damage = 0;
-
+    public Vector2 aimDirection;
+    public float speed;
+    private double changeDirectionEvery;
+    private bool fireWithOffset = true;
+    private Vector2 aimOffset;
     private void Start()
     {
         base.priority = 5;
+        //Get the lifespan of the object then divide by 4 to very the tornado's path
+        float lifespan = GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length;
+        changeDirectionEvery = lifespan / 4;
+    }
+
+    private void Update()
+    {
+    }
+
+    private void instantiateAimOffset()
+    {
+        if (aimDirection == null)
+            return;
+        else if (aimOffset != null)
+            aimOffset = aimDirection + new Vector2(1, 1);//Find a way to offset the original shot
     }
     protected override void OnCollisionEnter2D(Collision2D other)
     {

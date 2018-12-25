@@ -305,6 +305,7 @@
     <Compile Include="Assets\Scripts\Player\Player2Controller.cs" />
     <Compile Include="Assets\Scripts\Spells\BasicAttack.cs" />
     <Compile Include="Assets\Scripts\Spells\CastBasicAttack.cs" />
+    <Compile Include="Assets\Scripts\Spells\CastDodge.cs" />
     <Compile Include="Assets\Scripts\Spells\CastFireLion.cs" />
     <Compile Include="Assets\Scripts\Spells\CastTornado.cs" />
     <Compile Include="Assets\Scripts\Spells\FireLion.cs" />
