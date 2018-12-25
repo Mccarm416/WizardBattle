@@ -14,23 +14,33 @@ public class TitleScreenController : MonoBehaviour {
 	private AudioSource playBtnAudSrc;
 	private AudioSource musicPlayer;
 
-	public Button playBtn;
 	public Image panelFade;
 	private GameObject panelMainMenu;
 	private GameObject panelCredits;
 	private GameObject panelOptions;
 
-	public Button btnLaunch;
-	public Button btnOptions;
-	public Button btnCredits;
-	public Button btnFakeLaunch;
+    public Image cursorLeft;
+    public Image cursorRight;
 
+    public Button btnStart;
+    public Button btnLaunch;
+    public Button btnFakeLaunch;
+    public Button btnOptions;
+    public Button btnOptionsBack;
+	public Button btnCredits;
+    public Button btnCreditsBack;
+
+    private Button selectedButton;
+
+
+    private int cursorPosition = 0;
     private TitleScreenControls titleScreenControls;
     private List<Button> menuButtons = new List<Button>();
 
 
     void Start () {
-		playBtnAudSrc = playBtn.GetComponent <AudioSource> ();
+        selectedButton = btnStart;
+		playBtnAudSrc = btnStart.GetComponent <AudioSource> ();
         menuButtons.Add(btnLaunch);
         menuButtons.Add(btnOptions);
         menuButtons.Add(btnCredits);
@@ -38,22 +48,80 @@ public class TitleScreenController : MonoBehaviour {
         panelMainMenu = GameObject.Find ("panelMainMenu");
 		panelOptions = GameObject.Find ("panelOptions");
 		panelCredits = GameObject.Find ("panelCredits");
+        cursorLeft.enabled = false;
+        cursorRight.enabled = false;
 		panelMainMenu.SetActive (false);
 		panelOptions.SetActive (false);
 		panelCredits.SetActive (false);
 		panelFade.enabled = false;
 	}
-
     private void Update()
     {
-        titleScreenControls.getInput();
+        getStart();
+        moveCursor();
+        getEnterCancel();
+        
     }
 
+    private void getEnterCancel()
+    {
+        if(titleScreenControls.getEnterButton())
+        {
+            selectedButton.onClick.Invoke();
+        }
+        else if (titleScreenControls.getCancelButton())
+        {
+            if(selectedButton == btnOptionsBack || selectedButton == btnCreditsBack)
+            {
+                selectedButton.onClick.Invoke();
+            }
+        }
+    }
+    private void getStart()
+    {
+        if(!panelMainMenu.activeInHierarchy && titleScreenControls.getStartButton())
+        {
+            selectedButton.onClick.Invoke();
+        }
+    }
+    private void moveCursor()
+    {
+        int moveCurs = titleScreenControls.getMoveInput();
+        //Check to see if there's input and the user is on the main menu
+        if (moveCurs != 0 && panelMainMenu.activeInHierarchy)
+        {
+            cursorPosition = cursorPosition + moveCurs;
+            //Check to see if the player is at the bottom of the list and is going down. 
+            if (cursorPosition > menuButtons.Count - 1)
+            {
+                //Move cursor to the top of the list
+                cursorPosition = 0;
+
+            }
+            //Check to see if the player is at the top of the list and is going up
+            else if (cursorPosition < 0)
+            {
+                //Move cursor to the bottom of the list
+                cursorPosition = menuButtons.Count - 1;
+            }
+            moveCursorImages(menuButtons[cursorPosition]);
+        }
+
+    }
+
+    private void moveCursorImages(Button newButton)
+    {
+        selectedButton = newButton;
+        RectTransform btnTransform = newButton.GetComponent<RectTransform>();
+        float newY = btnTransform.position.y;
+        cursorRight.transform.position = new Vector3(cursorRight.transform.position.x, newY, cursorRight.transform.position.z);
+        cursorLeft.transform.position = new Vector3(cursorLeft.transform.position.x, newY, cursorLeft.transform.position.z);
+    }
     public void btnStartClick() {
-		Debug.Log ("Start clicked");
 		playBtnAudSrc.enabled = true;
 		playBtnAudSrc.Play ();
 		StartCoroutine (delayOpen ());
+        selectedButton = btnLaunch;
 	}
 
 	public void btnLaunchClick() {
@@ -63,33 +131,39 @@ public class TitleScreenController : MonoBehaviour {
 
 	public void btnOptionsClick() {
 		panelMainMenu.SetActive (false);
-		panelOptions.SetActive (true);;
+		panelOptions.SetActive (true);
+        moveCursorImages(btnOptionsBack);
 	}
 
 	public void btnOptionsBackClick() {
 		panelMainMenu.SetActive (true);
 		panelOptions.SetActive (false);
+        moveCursorImages(menuButtons[cursorPosition]);
 	}
 
 	public void btnCreditsClick() {
 		panelMainMenu.SetActive (false);
-		panelCredits.SetActive (true);;
+		panelCredits.SetActive (true);
+        moveCursorImages(btnCreditsBack);
 	}
 
 	public void btnCreditsBackClick() {
 		panelMainMenu.SetActive (true);
 		panelCredits.SetActive (false);
-	}
-		
-		
+        moveCursorImages(menuButtons[cursorPosition]);
+    }
 
-	IEnumerator fadeToBlack () {
+
+
+    IEnumerator fadeToBlack () {
 		//Darkens the screen.
 		panelFade.CrossFadeAlpha (20f, 2.25f, false);
 		Image mainMenu = panelMainMenu.GetComponent<Image> ();
 		//Fade out the Main Menu panel and buttons !THIS ISN'T WORKING FOR THE BUTTON THAT'S CLICKED!
 		mainMenu.CrossFadeAlpha (0f, 2f, false);
-		panelMainMenu.GetComponentInChildren<Text> ().CrossFadeAlpha (0f, 2f, false);
+        cursorRight.CrossFadeAlpha(0f, 2f, false);
+        cursorLeft.CrossFadeAlpha(0f, 2f, false);
+        panelMainMenu.GetComponentInChildren<Text> ().CrossFadeAlpha (0f, 2f, false);
 		btnFakeLaunch.GetComponent<Image>().CrossFadeAlpha (0f, 2f, false);
 		btnFakeLaunch.GetComponentInChildren<Text> ().CrossFadeAlpha (0f, 2f, false);
 		btnOptions.GetComponent<Image>().CrossFadeAlpha (0f, 2f, false);
@@ -103,5 +177,7 @@ public class TitleScreenController : MonoBehaviour {
 	IEnumerator delayOpen() {
 		yield return new WaitForSeconds (0.5f);
 		panelMainMenu.SetActive (true);
-	}
+        cursorLeft.enabled = true;
+        cursorRight.enabled = true;
+    }
 }
