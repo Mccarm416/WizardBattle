@@ -14,12 +14,12 @@ public class BackgroundController : MonoBehaviour {
 
 	public Text lblHealthP1;
 	public Text lblHealthP2;
-	public Text lblHealthTextP1;
-	public Text lblHealthTextP2;
-	public int healthP1;
-	public int healthP2;
 	Player1Controller player1;
 	Player2Controller player2;
+
+    public Slider healthP1;
+    public Slider healthP2;
+    
 
 	private float menuBuffer;
 	GameObject pauseMenu;
@@ -43,32 +43,31 @@ public class BackgroundController : MonoBehaviour {
 		pauseMenu = GameObject.Find ("pauseMenuPanel");
 		pauseMenu.SetActive (false);
 		lblHealthP1.enabled = false;
-		lblHealthTextP1.enabled = false;
 		lblHealthP2.enabled = false;
-		lblHealthTextP2.enabled = false;
 		audioSrc = pauseMenu.GetComponent<AudioSource>();
 		panelReady = GameObject.Find ("panelReady").GetComponent<Image> ();
 		menuBuffer = 0f;
-		initialiseUI ();
 		StartCoroutine (ReadyFight ());
 	}
 
 	void Update () {
-		initialiseUI ();
+        updateHealth();
 		if (Input.GetKeyDown (KeyCode.Escape) || Input.GetKeyDown("joystick button 7")) {
 			PauseMenu ();
 		}
         
 	}
 
-	public void initialiseUI() {
-		//Update the UI
-		int healthP1 = player1.Health;
-		int healthP2 = player2.Health;
+    private void updateHealth()
+    {
+        lblHealthP1.text = player1.Health.ToString();
+        lblHealthP2.text = player2.Health.ToString();
+        float p1HpValue = (float)player1.Health / 100;
+        float p2HpValue = (float)player2.Health / 100;
+        healthP1.value = p1HpValue;
+        healthP2.value = p2HpValue;
+    }
 
-		lblHealthP1.text = healthP1.ToString();
-		lblHealthP2.text = healthP2.ToString();
-	}
 
 	IEnumerator ReadyFight() {
 		//Ready... Fight! played at start of round
@@ -91,9 +90,7 @@ public class BackgroundController : MonoBehaviour {
 		lblReady.enabled = false;
 		lblGo.enabled = true;
 		lblHealthP1.enabled = true;
-		lblHealthTextP1.enabled = true;
 		lblHealthP2.enabled = true;
-		lblHealthTextP2.enabled = true;
 		gameStart = true;
 		yield return new WaitForSeconds (1.4f);
 		lblGo.enabled = false;

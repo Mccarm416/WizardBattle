@@ -24,8 +24,8 @@ public class P2Movement : MovementController
         float moveHorizontal = Input.GetAxis("Joy2 LeftStickHorizontal");
         float moveVertical = Input.GetAxis("Joy2 LeftStickVertical");
         //Calculating the new point to move to
-        Vector2 velocity = new Vector2(moveHorizontal, moveVertical);
-        //rBody.velocity = velocity * speed;
+        Vector2 movement = new Vector2(moveHorizontal, moveVertical);
+        rBody.AddForce(movement * speed);
         //Check to see if movement animation should play (this should be snappier)
         if (moveHorizontal != 0 || moveVertical != 0)
         {

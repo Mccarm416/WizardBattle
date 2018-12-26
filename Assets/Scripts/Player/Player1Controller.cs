@@ -74,7 +74,6 @@ public class Player1Controller : Player {
 	public void OnCollisionExit2D(Collision2D other) {
 		if (other.gameObject.tag.Equals("player2")) {
 			rBody.isKinematic = false;
-			Move ();
 		}
 	}
 
@@ -82,8 +81,12 @@ public class Player1Controller : Player {
 	public void Death() {
 		//Pass player controllers to the next scenes controller
 		Player1Controller player1 = GetComponent<Player1Controller> ();
-		Destroy (GetComponent<PolygonCollider2D> ());
-		EndScreenController.player1 = player1;
+        Destroy(Camera.main.GetComponent<FixedCameraFollow>());
+        Destroy(player2);
+		Destroy (GetComponent<CapsuleCollider2D> ());
+        Destroy(GetComponent<P2Cast>());
+        Destroy(GetComponent<P2Movement>());
+        EndScreenController.player1 = player1;
 		EndScreenController.player2 = player2;
 		//Stop the players from moving and shooting
 		Destroy (player2.gameObject);

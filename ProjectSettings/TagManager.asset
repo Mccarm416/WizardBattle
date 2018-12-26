@@ -19,8 +19,8 @@ TagManager:
   - 
   - Player1
   - Player2
-  - p1Projectile
-  - p2Projectile
+  - Spell
+  - Water
   - 
   - 
   - 

@@ -13,7 +13,7 @@ public class P1Movement : MovementController
     public int speed;
     private void Start()
     {
-        speed = 200;
+        speed = 50;
         animator = GetComponent<Animator>();
         rBody = GetComponent<Rigidbody2D>();
     }
@@ -25,7 +25,6 @@ public class P1Movement : MovementController
         float  moveVertical = Input.GetAxis("Joy1 LeftStickVertical");
         //Calculating the new point to move to
         Vector2 movement = new Vector2(moveHorizontal, moveVertical);
-        //movement.Normalize();
         rBody.AddForce(movement * speed);
         //Check to see if movement animation should play (this should be snappier)
         if (moveHorizontal != 0 || moveVertical != 0)

@@ -87,12 +87,10 @@ public class Player2Controller : Player {
         if (other.gameObject.tag.Equals("player2"))
         {
             rBody.isKinematic = false;
-            Move();
         }
         else if (other.gameObject.tag.Equals("border"))
         {
             rBody.isKinematic = false;
-            Move();
         }
     }
 
@@ -101,6 +99,11 @@ public class Player2Controller : Player {
     {
         //Pass player controllers to the next scenes controller
         Player2Controller player2 = GetComponent<Player2Controller>();
+        Destroy(Camera.main.GetComponent<FixedCameraFollow>());
+        Destroy(player1);
+        Destroy(GetComponent<CapsuleCollider2D>());
+        Destroy(GetComponent<P1Cast>());
+        Destroy(GetComponent<P1Movement>());
         Destroy(GetComponent<PolygonCollider2D>());
         EndScreenController.player1 = player1;
         EndScreenController.player2 = player2;

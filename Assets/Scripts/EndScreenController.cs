@@ -41,7 +41,7 @@ public class EndScreenController : MonoBehaviour {
 		else {
 			lblWinner.text = "Player 2 Wins!";
 		}
-		lblP1Hits.text = "Hits : " + player2.hitsTaken;
+		lblP1Hits.text = "Hits : " + player1.hitsTaken;
 		lblP1HitsTaken.text = "Hits Taken : " + player1.hitsTaken;
 		lblP1Health.text = "Remaining Health: " + player1.Health;
 

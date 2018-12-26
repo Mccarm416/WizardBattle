@@ -7,7 +7,7 @@ public class CastBasicAttack : MonoBehaviour
 
     public GameObject spell;
 
-    private float speed = 600f;
+    private float speed = 750f;
     private double cooldown = 0.7;
     public double nextShot = 0;
     private Vector2 origin;
@@ -25,8 +25,8 @@ public class CastBasicAttack : MonoBehaviour
                 Vector2 playerPos = GetComponent<Transform>().position;
                 origin = aimDirection + playerPos;
                 GameObject basicAttack = Instantiate(spell, origin, Quaternion.identity) as GameObject;
+                Physics2D.IgnoreCollision(basicAttack.GetComponent<Collider2D>(), GetComponent<CapsuleCollider2D>());
                 basicAttack.GetComponent<BasicAttack>().caster = gameObject.tag;
-                Physics2D.IgnoreCollision(basicAttack.GetComponent<Collider2D>(), GetComponent<Collider2D>());
                 float angle = Mathf.Atan2(aimDirection.y, aimDirection.x) * Mathf.Rad2Deg;
                 basicAttack.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
                 GetComponent<Rigidbody2D>().freezeRotation = true;

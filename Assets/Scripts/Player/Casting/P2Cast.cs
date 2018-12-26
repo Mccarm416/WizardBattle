@@ -24,5 +24,9 @@ public class P2Cast : Cast
         {
             gameObject.GetComponent<CastBasicAttack>().castBasicAttack();
         }
+        else if (Input.GetButtonDown("Joy2 A"))
+        {
+            gameObject.GetComponent<CastDodge>().castDodge();
+        }
     }
 }

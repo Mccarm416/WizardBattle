@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 2157937714699773633}
   - component: {fileID: 2157937714699773634}
   - component: {fileID: 2157937714699773635}
-  - component: {fileID: 2157937714699773632}
   - component: {fileID: 2157937714699773639}
   - component: {fileID: 2157937714699773637}
   - component: {fileID: 2157937714699773636}
@@ -79,7 +78,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 6
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: ab403c0f452faf14682c61ab594c9472, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -109,61 +108,6 @@ MonoBehaviour:
   deathSound: {fileID: 8300000, guid: b8753db59ad99e149b4aaf04386d81c6, type: 3}
   death01: {fileID: 8300000, guid: cd8cce8ac97138d4ebabf8cf97b86cc1, type: 3}
   death02: {fileID: 8300000, guid: 0c5e325e92a832a4d9369d0c4442ba55, type: 3}
---- !u!60 &2157937714699773632
-PolygonCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2157937714699773660}
-  m_Enabled: 0
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.44838253, y: 0.37599936}
-    oldSize: {x: 33, y: 58}
-    newSize: {x: 33, y: 58}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Points:
-    m_Paths:
-    - - {x: -2.8294678, y: 36.56864}
-      - {x: -9.072632, y: 30.160042}
-      - {x: -9.166122, y: 26.400291}
-      - {x: -10.255371, y: 25.470299}
-      - {x: -9.966812, y: 12.574501}
-      - {x: -7.993469, y: 9.034172}
-      - {x: -11.199478, y: 6.0090637}
-      - {x: -14.475037, y: -3.7052002}
-      - {x: -15.15184, y: -4.7975235}
-      - {x: -14.796616, y: -8.186638}
-      - {x: -11.883606, y: -9.996712}
-      - {x: -9.452942, y: -9.699493}
-      - {x: -7.368973, y: -7.6053696}
-      - {x: -7.4619446, y: -16.952423}
-      - {x: -8.245819, y: -18.062004}
-      - {x: -8.40654, y: -21.735535}
-      - {x: 11.292374, y: -21.80796}
-      - {x: 11.540146, y: -18.938843}
-      - {x: 10.194595, y: -18.673164}
-      - {x: 10.449448, y: -10.074715}
-      - {x: 9.862335, y: -7.4372406}
-      - {x: 11.291611, y: -7.7087936}
-      - {x: 14.645218, y: -9.907295}
-      - {x: 18.182785, y: -8.270828}
-      - {x: 18.25093, y: -3.841919}
-      - {x: 12.928482, y: 5.9025955}
-      - {x: 10.893295, y: 7.2342834}
-      - {x: 13.83049, y: 12.081734}
-      - {x: 13.668442, y: 28.173714}
-      - {x: 6.273346, y: 36.571205}
 --- !u!50 &2157937714699773639
 Rigidbody2D:
   serializedVersion: 4
@@ -176,7 +120,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 5
   m_LinearDrag: 5
   m_AngularDrag: 5
   m_GravityScale: 1

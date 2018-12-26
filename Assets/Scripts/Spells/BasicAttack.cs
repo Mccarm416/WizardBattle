@@ -20,7 +20,6 @@ public class BasicAttack : Spell
         //Enemy player hit
         if (other.gameObject.tag == "player1" || other.gameObject.tag == "player2")
         {
-            Debug.Log("Basic hit: caster=" + caster + "target=" + other.gameObject.tag);
             other.collider.SendMessage("onTakeDamage", damage);
             audioSrc.enabled = true;
             audioSrc.clip = hit;
