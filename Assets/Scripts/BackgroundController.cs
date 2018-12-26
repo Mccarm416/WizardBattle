@@ -19,6 +19,7 @@ public class BackgroundController : MonoBehaviour {
 
     public Slider healthP1;
     public Slider healthP2;
+    public Image panelBattleUI;
     
 
 	private float menuBuffer;
@@ -42,8 +43,9 @@ public class BackgroundController : MonoBehaviour {
 		gameStart = false;
 		pauseMenu = GameObject.Find ("pauseMenuPanel");
 		pauseMenu.SetActive (false);
-		lblHealthP1.enabled = false;
-		lblHealthP2.enabled = false;
+        panelBattleUI.gameObject.SetActive(false);
+        lblHealthP1.enabled = false;
+        lblHealthP2.enabled = false;
 		audioSrc = pauseMenu.GetComponent<AudioSource>();
 		panelReady = GameObject.Find ("panelReady").GetComponent<Image> ();
 		menuBuffer = 0f;
@@ -87,7 +89,8 @@ public class BackgroundController : MonoBehaviour {
 		player2.enable ();
 		aS.clip = audioGo;
 		aS.Play ();
-		lblReady.enabled = false;
+        panelBattleUI.gameObject.SetActive(true);
+        lblReady.enabled = false;
 		lblGo.enabled = true;
 		lblHealthP1.enabled = true;
 		lblHealthP2.enabled = true;

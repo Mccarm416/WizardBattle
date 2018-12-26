@@ -4,5 +4,6 @@ using UnityEngine;
 
 public abstract class MovementController : MonoBehaviour
 {
+    public int speed;
     public abstract void Move();
 }

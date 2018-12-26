@@ -131,6 +131,7 @@ public class Player2Controller : Player {
 
     IEnumerator Scream()
     {
+        Debug.Log("deciding scream");
         //Decide the death scream to use
 
         //Generate a random number between 1-2 to select a death scream
@@ -149,6 +150,7 @@ public class Player2Controller : Player {
         playerAudio.enabled = true;
         //Wait 1 second then play the death scream
         yield return new WaitForSeconds(1.9f);
+        Debug.Log("screaming");
         playerAudio.Play();
         //Wait 5 seconds then load the end screen
         yield return new WaitForSeconds(5f);

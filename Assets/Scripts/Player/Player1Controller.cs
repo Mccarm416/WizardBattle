@@ -112,7 +112,6 @@ public class Player1Controller : Player {
 
 	IEnumerator Scream() {
 		//Decide the death scream to use
-
 		//Generate a random number between 1-2 to select a death scream
 		int randomScream = Random.Range (1, 3);
 		playerAudio = GetComponent<AudioSource> ();

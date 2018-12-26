@@ -20,7 +20,7 @@ public class P2Cast : Cast
             gcdTime = Time.time + globalCooldown;
             gameObject.GetComponent<CastTornado>().castTornado();
         }
-        else if (Input.GetButtonDown("Joy2 RightStickBtn"))
+        else if (Input.GetAxis("Joy2 RT") > 0.0)
         {
             gameObject.GetComponent<CastBasicAttack>().castBasicAttack();
         }

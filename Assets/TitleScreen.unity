@@ -1418,7 +1418,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &866648402
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1979,6 +1979,7 @@ MonoBehaviour:
   panelFade: {fileID: 509729341}
   cursorLeft: {fileID: 82433853}
   cursorRight: {fileID: 994075379}
+  txtVersion: {fileID: 2025322475}
   btnStart: {fileID: 373728239}
   btnLaunch: {fileID: 920971014}
   btnFakeLaunch: {fileID: 1318339178}
@@ -2177,7 +2178,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1223783462
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3482,7 +3483,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0.18836021, b: 1, a: 1}
+  m_Color: {r: 0, g: 0.007843138, b: 0.8745098, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -3730,7 +3731,7 @@ MonoBehaviour:
     m_Font: {fileID: 12800000, guid: 4f3dc90c473f13b49ba469f15f53dffd, type: 3}
     m_FontSize: 80
     m_FontStyle: 0
-    m_BestFit: 0
+    m_BestFit: 1
     m_MinSize: 0
     m_MaxSize: 300
     m_Alignment: 1

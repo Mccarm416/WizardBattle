@@ -5,7 +5,7 @@ using UnityEngine;
 //Manages input on the main menu and title screen
 public class TitleScreenControls : MonoBehaviour
 {
-    private double buttonBuffer = 0.2;
+    private double buttonBuffer = 0.5;
     private double nextButton = 0;
     private double movementBuffer = 0.3;
     private double nextMovement = 0;

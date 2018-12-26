@@ -118,7 +118,7 @@ d251bf88db6c95a6b1aa0b69298da9ef UnityEngine.SpatialTracking.dll:UnityEngine.Spa
 06999031502a8f531463a25c6b2e512b Assembly-CSharp.dll:.EndScreenController
 6023febd90a4ba73c7471ecd644b75ce Assembly-CSharp.dll:.Player2Controller
 71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:.TitleScreenControls
-737f597624bb2677071fb872f4ad6a12 Assembly-CSharp.dll:.TitleScreenController
+a80fe8dbd2fcacf6609d26f4895ee968 Assembly-CSharp.dll:.TitleScreenController
 247fffdcf027133103d3e67813b637ab Assembly-CSharp.dll:.CastDodge
 2a891d788f5847e1736cc9b4d28abcc9 Assembly-CSharp.dll:.CastBasicAttack
 e6ae40841db498b6e673877ac45ad208 UnityEngine.Networking.dll:UnityEngine.Networking.NetworkAnimator
@@ -135,7 +135,7 @@ e0ee4b3d4e27318934cc940a969d3d96 UnityEngine.Networking.dll:UnityEngine.Networki
 ad9173d3a69d99153f38ed4b62226129 UnityEngine.Networking.dll:UnityEngine.Networking.NetworkTransform
 9b895dcabbc1faf095c000c32d471fd0 UnityEngine.Networking.dll:UnityEngine.Networking.NetworkTransformChild
 5887ef1bc706b22b773d253fd443ceef UnityEngine.Networking.dll:UnityEngine.Networking.NetworkTransformVisualizer
-5ab1c86f6fe537b38bf7f22108754eb8 Assembly-CSharp.dll:.BackgroundController
+042c7c1cb533e2e24441f285df9d66dd Assembly-CSharp.dll:.BackgroundController
 71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:.P2Cast
 cf96e5f7b3d069bab453925bd41be04e UnityEngine.TestRunner.dll:UnityEngine.TestTools.EnumerableSetUpTearDownCommandState
 71bb6a6b6c8f052f948db64c7dd3ca4f UnityEngine.TestRunner.dll:UnityEngine.TestTools.TestRunner.Callbacks.PlayModeRunnerCallback
@@ -157,6 +157,6 @@ a1280a8b42b0f462bd040d2f87c057f8 Assembly-CSharp.dll:.FireLion
 71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:.P1Cast
 d251bf88db6c95a6b1aa0b69298da9ef UnityEngine.SpatialTracking.dll:UnityEngine.SpatialTracking.TrackedPoseDriver
 e203148eea65eb189179d37a799e8e44 Assembly-CSharp.dll:.P2AimController
-71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:.P2Movement
+5d064456c40f7c34690dc0c9d079accc Assembly-CSharp.dll:.P2Movement
 2a891d788f5847e1736cc9b4d28abcc9 Assembly-CSharp.dll:.CastTornado
 2a891d788f5847e1736cc9b4d28abcc9 Assembly-CSharp.dll:.CastFireLion

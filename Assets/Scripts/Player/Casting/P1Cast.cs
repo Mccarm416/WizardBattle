@@ -21,7 +21,7 @@ public class P1Cast : Cast
             gcdTime = Time.time + globalCooldown;
             gameObject.GetComponent<CastTornado>().castTornado();
         }
-        else if (Input.GetButtonDown("Joy1 RightStickBtn"))
+        else if (Input.GetAxis("Joy1 RT") > 0.0)
         {
             gameObject.GetComponent<CastBasicAttack>().castBasicAttack();
         }

@@ -22,6 +22,7 @@ public class TitleScreenController : MonoBehaviour {
     public Image cursorLeft;
     public Image cursorRight;
 
+    public Text txtVersion;
     public Button btnStart;
     public Button btnLaunch;
     public Button btnFakeLaunch;
@@ -32,7 +33,7 @@ public class TitleScreenController : MonoBehaviour {
 
     private Button selectedButton;
 
-
+    private bool gameStart = false;
     private int cursorPosition = 0;
     private TitleScreenControls titleScreenControls;
     private List<Button> menuButtons = new List<Button>();
@@ -57,9 +58,12 @@ public class TitleScreenController : MonoBehaviour {
 	}
     private void Update()
     {
-        getStart();
-        moveCursor();
-        getEnterCancel();
+        if (!gameStart)
+        {
+            getStart();
+            moveCursor();
+            getEnterCancel();
+        }
         
     }
 
@@ -125,7 +129,9 @@ public class TitleScreenController : MonoBehaviour {
 	}
 
 	public void btnLaunchClick() {
+        gameStart = true;
 		panelFade.enabled = true;
+        playBtnAudSrc.Play();
 		StartCoroutine (fadeToBlack ());
 	}
 
@@ -159,18 +165,23 @@ public class TitleScreenController : MonoBehaviour {
 		//Darkens the screen.
 		panelFade.CrossFadeAlpha (20f, 2.25f, false);
 		Image mainMenu = panelMainMenu.GetComponent<Image> ();
-		//Fade out the Main Menu panel and buttons !THIS ISN'T WORKING FOR THE BUTTON THAT'S CLICKED!
+		//Fade out the Main Menu panel and buttons
 		mainMenu.CrossFadeAlpha (0f, 2f, false);
         cursorRight.CrossFadeAlpha(0f, 2f, false);
         cursorLeft.CrossFadeAlpha(0f, 2f, false);
-        panelMainMenu.GetComponentInChildren<Text> ().CrossFadeAlpha (0f, 2f, false);
-		btnFakeLaunch.GetComponent<Image>().CrossFadeAlpha (0f, 2f, false);
+        panelMainMenu.GetComponentInChildren<Text> ().CrossFadeAlpha (0f, 2f, false);//This doesn't grab txtVersion for some reason so it must be done manually below
+        txtVersion.CrossFadeAlpha(0f, 2f, false);
+        btnFakeLaunch.GetComponent<Image>().CrossFadeAlpha (0f, 2f, false);
 		btnFakeLaunch.GetComponentInChildren<Text> ().CrossFadeAlpha (0f, 2f, false);
 		btnOptions.GetComponent<Image>().CrossFadeAlpha (0f, 2f, false);
 		btnOptions.GetComponentInChildren<Text> ().CrossFadeAlpha (0f, 2f, false);
 		btnCredits.GetComponent<Image>().CrossFadeAlpha (0f, 2f, false);
 		btnCredits.GetComponentInChildren<Text> ().CrossFadeAlpha (0f, 2f, false);
-		yield return new WaitForSeconds (3.5f);
+        cursorLeft.CrossFadeAlpha(0f, 1.5f, false);
+        cursorRight.CrossFadeAlpha(0f, 1.5f, false);
+
+
+        yield return new WaitForSeconds (3.5f);
 		SceneManager.LoadScene (1);
 	}
 

@@ -10,11 +10,11 @@ public class CastDodge : MonoBehaviour
     private double dodgeFixTime = 0;
     private double lastDodge = 0;
     private float reduceDrag = 1.7f;
-    private int increaseSpeed = 1300;
+    private int increaseSpeed = 500;
     private bool fixDragAndSpeed = false;
     private AudioSource audioSrc;
     private Rigidbody2D rBody;
-    private  P1Movement movementController;
+    private  MovementController movementController;
 
     void Start()
     {
@@ -41,7 +41,7 @@ public class CastDodge : MonoBehaviour
             dodgeFixTime = Time.time + dodgeLength;
             rBody.drag = rBody.drag - reduceDrag;
             rBody.angularDrag = rBody.angularDrag - reduceDrag;
-            GetComponent<P1Movement>().speed = GetComponent<P1Movement>().speed + increaseSpeed;
+            GetComponent<MovementController>().speed = GetComponent<MovementController>().speed + increaseSpeed;
             fixDragAndSpeed = true;
         }
     }
