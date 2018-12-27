@@ -8,7 +8,7 @@ public class CastFireLion : MonoBehaviour
     public GameObject spell;
     private double cooldown = 3;
     public double nextShot = 0;
-    private float speed = 525f;
+    private float speed = 750f;
 
 
     public void castFireLion()

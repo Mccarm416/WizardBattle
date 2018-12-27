@@ -9,7 +9,7 @@ public class CastTornado : MonoBehaviour
     private Vector2 origin;
     private double cooldown = 7;
     public double nextShot = 0;
-    private float speed = 600f;
+    private float speed = 450f;
 
 
     public void castTornado()

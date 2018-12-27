@@ -273,6 +273,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   aimDirection: {x: 0, y: 0}
+  crosshair: {fileID: 7230409389412511057, guid: c217faa0119b789459e4624ca09909bf,
+    type: 3}
 --- !u!114 &8363619553402366499
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -265,6 +265,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a6fe587dc66d6054b9ece004e75d8113, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  speed: 0
 --- !u!114 &9211709013185509228
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -296,6 +297,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   aimDirection: {x: 0, y: 0}
+  crosshair: {fileID: 4809834712697171839, guid: 43d0b0672835e06499a5ad2580661475,
+    type: 3}
 --- !u!70 &595230150579738137
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

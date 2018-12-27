@@ -7,7 +7,7 @@ public class CastBasicAttack : MonoBehaviour
 
     public GameObject spell;
 
-    private float speed = 750f;
+    private float speed = 1000f;
     private double cooldown = 0.7;
     public double nextShot = 0;
     private Vector2 origin;

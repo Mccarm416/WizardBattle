@@ -291,7 +291,7 @@
     <Compile Include="Assets\Scripts\PixelDensityCamera.cs" />
     <Compile Include="Assets\Scripts\Player\Aim\Aim.cs" />
     <Compile Include="Assets\Scripts\Player\Aim\AimAI.cs" />
-    <Compile Include="Assets\Scripts\Player\Aim\AimController.cs" />
+    <Compile Include="Assets\Scripts\Player\Aim\P1AimController.cs" />
     <Compile Include="Assets\Scripts\Player\Aim\P2AimController.cs" />
     <Compile Include="Assets\Scripts\Player\Casting\Cast.cs" />
     <Compile Include="Assets\Scripts\Player\Casting\P1Cast.cs" />
@@ -303,6 +303,7 @@
     <Compile Include="Assets\Scripts\Player\Player1Controller.cs" />
     <Compile Include="Assets\Scripts\Player\Player2AIController.cs" />
     <Compile Include="Assets\Scripts\Player\Player2Controller.cs" />
+    <Compile Include="Assets\Scripts\RandomMusicController.cs" />
     <Compile Include="Assets\Scripts\Spells\BasicAttack.cs" />
     <Compile Include="Assets\Scripts\Spells\CastBasicAttack.cs" />
     <Compile Include="Assets\Scripts\Spells\CastDodge.cs" />
