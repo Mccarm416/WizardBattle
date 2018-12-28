@@ -163,4 +163,27 @@ public class Player1Controller : Player {
             Death();
         }
     }
+
+    void onTakeColdDamage(int[] coldDamage)
+    {
+        Health = Health - coldDamage[0];
+        hitsTaken++;
+        if (Health <= 0)
+        {
+            Death();
+        }
+        StartCoroutine(coldEffect(coldDamage[1], coldDamage[2]));
+    }
+
+    IEnumerator coldEffect(int speedReduction, int coldLength)
+    {
+        CastDodge dodge = GetComponent<CastDodge>();
+        dodge.increaseSpeed = dodge.increaseSpeed - (speedReduction * 8);
+        movementController.speed = movementController.speed - speedReduction;
+        GetComponent<SpriteRenderer>().color = new Color(0, 160, 255, 1);
+        yield return new WaitForSeconds(coldLength);
+        GetComponent<SpriteRenderer>().color = Color.white;
+        movementController.speed = movementController.speed + speedReduction;
+        dodge.increaseSpeed = dodge.increaseSpeed + (speedReduction * 8);
+    }
 }

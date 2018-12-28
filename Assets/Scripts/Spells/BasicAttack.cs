@@ -14,7 +14,7 @@ public class BasicAttack : Spell
         base.priority = 1;
     }
 
-    protected override void OnCollisionEnter2D(Collision2D other)
+    protected void OnCollisionEnter2D(Collision2D other)
     {
         AudioSource audioSrc = GetComponent<AudioSource>();
         //Enemy player hit

@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 5402728512297262596}
   - component: {fileID: 6799320900611432457}
   - component: {fileID: 8363619553402366499}
+  - component: {fileID: 8636556150705305928}
   - component: {fileID: 1668714164209101444}
   - component: {fileID: 1346708105883610275}
   - component: {fileID: 5604244977389127525}
@@ -144,7 +145,7 @@ AudioSource:
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
-  Mute: 0
+  Mute: 1
   Spatialize: 0
   SpatializePostEffects: 0
   Priority: 128
@@ -153,7 +154,7 @@ AudioSource:
   MaxDistance: 500
   Pan2D: 0
   rolloffMode: 0
-  BypassEffects: 0
+  BypassEffects: 1
   BypassListenerEffects: 0
   BypassReverbZones: 0
   rolloffCustomCurve:
@@ -289,6 +290,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spell: {fileID: 7440630950717084135, guid: d0af79b642b0b194c937c4c0bae7a90d, type: 3}
   nextShot: 0
+--- !u!114 &8636556150705305928
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2157937714699773660}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70ea8f20de8a3254e85178537bf8e356, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spell: {fileID: 4619141287700177311, guid: c59f6411028f9bc46948f82521b237d8, type: 3}
+  nextShot: 0
 --- !u!114 &1668714164209101444
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -343,3 +358,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dodgeSound: {fileID: 8300000, guid: d3b5e6810e8dc0440a6a1ccc0a8e64bd, type: 3}
+  increaseSpeed: 500

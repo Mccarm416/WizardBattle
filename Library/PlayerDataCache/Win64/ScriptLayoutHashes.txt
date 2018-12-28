@@ -6,6 +6,7 @@ Assets/TitleScreen.unity
 Assets/WizardBattle.unity
 Assets/EndScreen.unity
 SceneListEnd?
+2a891d788f5847e1736cc9b4d28abcc9 Assembly-CSharp.dll:.CastIcyGraspTrap
 71bb6a6b6c8f052f948db64c7dd3ca4f UnityEngine.Timeline.dll:UnityEngine.Timeline.ActivationPlayableAsset
 06f0fef534ca4c1d6064fd77a26bf722 UnityEngine.Timeline.dll:UnityEngine.Timeline.ActivationTrack
 8747051d8c53856e2def93af4f2a8b08 UnityEngine.Timeline.dll:UnityEngine.Timeline.AnimationPlayableAsset
@@ -114,12 +115,15 @@ ad9173d3a69d99153f38ed4b62226129 UnityEngine.Networking.dll:UnityEngine.Networki
 5887ef1bc706b22b773d253fd443ceef UnityEngine.Networking.dll:UnityEngine.Networking.NetworkTransformVisualizer
 d251bf88db6c95a6b1aa0b69298da9ef UnityEngine.SpatialTracking.dll:UnityEngine.SpatialTracking.TrackedPoseDriver
 5ae2ebe691162fcc08351db17be1241c Assembly-CSharp.dll:.Torndao
+71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:.CastIcyGrasp
 6023febd90a4ba73c7471ecd644b75ce Assembly-CSharp.dll:.Player2AIController
+fb22fe818194793fd3ed4be70f595ece Assembly-CSharp.dll:.IcyGraspTrap
 06999031502a8f531463a25c6b2e512b Assembly-CSharp.dll:.EndScreenController
 6023febd90a4ba73c7471ecd644b75ce Assembly-CSharp.dll:.Player2Controller
+a1280a8b42b0f462bd040d2f87c057f8 Assembly-CSharp.dll:.IcyGrasp
 71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:.TitleScreenControls
 a80fe8dbd2fcacf6609d26f4895ee968 Assembly-CSharp.dll:.TitleScreenController
-247fffdcf027133103d3e67813b637ab Assembly-CSharp.dll:.CastDodge
+cfc6176b85e98a6be781b942bdfba219 Assembly-CSharp.dll:.CastDodge
 2a891d788f5847e1736cc9b4d28abcc9 Assembly-CSharp.dll:.CastBasicAttack
 e6ae40841db498b6e673877ac45ad208 UnityEngine.Networking.dll:UnityEngine.Networking.NetworkAnimator
 71bb6a6b6c8f052f948db64c7dd3ca4f UnityEngine.Networking.dll:UnityEngine.Networking.NetworkBehaviour
@@ -137,6 +141,7 @@ ad9173d3a69d99153f38ed4b62226129 UnityEngine.Networking.dll:UnityEngine.Networki
 5887ef1bc706b22b773d253fd443ceef UnityEngine.Networking.dll:UnityEngine.Networking.NetworkTransformVisualizer
 042c7c1cb533e2e24441f285df9d66dd Assembly-CSharp.dll:.BackgroundController
 71bb6a6b6c8f052f948db64c7dd3ca4f Assembly-CSharp.dll:.P2Cast
+abfdd5a7a450ec239c171cbe7434108a Assembly-CSharp.dll:.RandomMusicController
 cf96e5f7b3d069bab453925bd41be04e UnityEngine.TestRunner.dll:UnityEngine.TestTools.EnumerableSetUpTearDownCommandState
 71bb6a6b6c8f052f948db64c7dd3ca4f UnityEngine.TestRunner.dll:UnityEngine.TestTools.TestRunner.Callbacks.PlayModeRunnerCallback
 259d013faac28e8ba0aa2a7542273735 UnityEngine.TestRunner.dll:UnityEngine.TestTools.TestRunner.PlaymodeTestsController
@@ -160,4 +165,3 @@ d251bf88db6c95a6b1aa0b69298da9ef UnityEngine.SpatialTracking.dll:UnityEngine.Spa
 5d064456c40f7c34690dc0c9d079accc Assembly-CSharp.dll:.P2Movement
 2a891d788f5847e1736cc9b4d28abcc9 Assembly-CSharp.dll:.CastTornado
 2a891d788f5847e1736cc9b4d28abcc9 Assembly-CSharp.dll:.CastFireLion
-abfdd5a7a450ec239c171cbe7434108a Assembly-CSharp.dll:.RandomMusicController

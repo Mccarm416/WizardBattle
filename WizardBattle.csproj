@@ -308,8 +308,12 @@
     <Compile Include="Assets\Scripts\Spells\CastBasicAttack.cs" />
     <Compile Include="Assets\Scripts\Spells\CastDodge.cs" />
     <Compile Include="Assets\Scripts\Spells\CastFireLion.cs" />
+    <Compile Include="Assets\Scripts\Spells\CastIcyGrasp.cs" />
+    <Compile Include="Assets\Scripts\Spells\CastIcyGraspTrap.cs" />
     <Compile Include="Assets\Scripts\Spells\CastTornado.cs" />
     <Compile Include="Assets\Scripts\Spells\FireLion.cs" />
+    <Compile Include="Assets\Scripts\Spells\IcyGrasp.cs" />
+    <Compile Include="Assets\Scripts\Spells\IcyGraspTrap.cs" />
     <Compile Include="Assets\Scripts\Spells\Spell.cs" />
     <Compile Include="Assets\Scripts\Spells\Torndao.cs" />
     <Compile Include="Assets\Scripts\TitleScreenController.cs" />

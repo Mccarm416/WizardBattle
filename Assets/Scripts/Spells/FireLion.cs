@@ -8,10 +8,10 @@ public class FireLion : Spell
 
     void Start()
     {
-        base.priority = 2;
+        base.priority = 5;
     }
 
-    protected override void OnCollisionEnter2D(Collision2D other)
+    protected void OnCollisionEnter2D(Collision2D other)
     {
         if (other.gameObject.tag == "player1" || other.gameObject.tag == "player2")
         {

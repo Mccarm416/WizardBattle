@@ -1,0 +1,4 @@
+0 - groundTM
+1 - cliff TM, impassable TM, water TM,
+2 - ground decoration
+3 - players, spells

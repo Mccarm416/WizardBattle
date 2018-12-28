@@ -10,7 +10,7 @@ public class CastDodge : MonoBehaviour
     private double dodgeFixTime = 0;
     private double lastDodge = 0;
     private float reduceDrag = 1.7f;
-    private int increaseSpeed = 500;
+    public int increaseSpeed = 500;
     private bool fixDragAndSpeed = false;
     private AudioSource audioSrc;
     private Rigidbody2D rBody;

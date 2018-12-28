@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 4228621813089847406}
   - component: {fileID: 4228621813089847405}
   - component: {fileID: 4228621813089847402}
+  - component: {fileID: 2864939207334878690}
   - component: {fileID: 4228621813089847401}
   - component: {fileID: 8822180032165745545}
   - component: {fileID: 1982435922514432189}
@@ -206,6 +207,20 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
+--- !u!114 &2864939207334878690
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4228621813089847409}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70ea8f20de8a3254e85178537bf8e356, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spell: {fileID: 4619141287700177311, guid: c59f6411028f9bc46948f82521b237d8, type: 3}
+  nextShot: 0
 --- !u!95 &4228621813089847401
 Animator:
   serializedVersion: 3
@@ -328,3 +343,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dodgeSound: {fileID: 8300000, guid: d3b5e6810e8dc0440a6a1ccc0a8e64bd, type: 3}
+  increaseSpeed: 500
