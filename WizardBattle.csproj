@@ -286,7 +286,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\BackgroundController.cs" />
-    <Compile Include="Assets\Scripts\EndScreenController.cs" />
     <Compile Include="Assets\Scripts\FixedCameraFollow.cs" />
     <Compile Include="Assets\Scripts\PixelDensityCamera.cs" />
     <Compile Include="Assets\Scripts\Player\Aim\Aim.cs" />
@@ -316,8 +315,10 @@
     <Compile Include="Assets\Scripts\Spells\IcyGraspTrap.cs" />
     <Compile Include="Assets\Scripts\Spells\Spell.cs" />
     <Compile Include="Assets\Scripts\Spells\Torndao.cs" />
-    <Compile Include="Assets\Scripts\TitleScreenController.cs" />
-    <Compile Include="Assets\Scripts\TitleScreenControls.cs" />
+    <Compile Include="Assets\Scripts\UI\EndScreenController.cs" />
+    <Compile Include="Assets\Scripts\UI\MenuControls.cs" />
+    <Compile Include="Assets\Scripts\UI\PauseScreenController.cs" />
+    <Compile Include="Assets\Scripts\UI\TitleScreenController.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Packages\com.unity.package-manager-ui\Editor\Resources\Styles\Main_Dark.uss" />

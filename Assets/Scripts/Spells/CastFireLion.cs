@@ -13,7 +13,7 @@ public class CastFireLion : MonoBehaviour
 
     public void castFireLion()
     {
-
+        Debug.Log("[FIRE LION] - nextShot=" + nextShot + " Time.time=" + Time.time);
         if (nextShot <= Time.time)
         {
             nextShot = Time.time + cooldown;

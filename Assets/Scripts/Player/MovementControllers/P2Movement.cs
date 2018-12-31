@@ -15,6 +15,8 @@ public class P2Movement : MovementController
         speed = 100;
         animator = GetComponent<Animator>();
         rBody = GetComponent<Rigidbody2D>();
+        Debug.Log("p2 rbody tag=" + rBody.gameObject.tag);
+
     }
 
     public override void Move()
@@ -23,6 +25,11 @@ public class P2Movement : MovementController
         //Get player input
         float moveHorizontal = Input.GetAxis("Joy2 LeftStickHorizontal");
         float moveVertical = Input.GetAxis("Joy2 LeftStickVertical");
+        if (moveHorizontal > 0 || moveVertical > 0  || moveVertical < 0 || moveHorizontal < 0)
+        {
+            Debug.Log("p2 is moving");
+
+        }
         //Calculating the new point to move to
         Vector2 movement = new Vector2(moveHorizontal, moveVertical);
         movement.Normalize();

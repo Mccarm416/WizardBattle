@@ -30,7 +30,7 @@ public class Player1Controller : Player {
 	void Start () {
 		enabled = true;
         movementController = GetComponent<P1Movement>();
-		Health = 100;
+        Health = 100;
 		animator = GetComponent<Animator> ();
 		camera = Camera.main;
 		dying = false;

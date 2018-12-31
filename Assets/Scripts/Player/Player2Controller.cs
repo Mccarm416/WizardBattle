@@ -29,6 +29,7 @@ public class Player2Controller : Player {
     {
         enabled = true;
         movementController = GetComponent<MovementController>();
+        Debug.Log("p2 movement controller tag=" + movementController.gameObject.tag);
         Health = 100;
         animator = GetComponent<Animator>();
         camera = Camera.main;
